@@ -16,7 +16,6 @@ This project was created with [Better-T-Stack](https://github.com/AmanVarshney01
 - **Authentication** - Better-Auth
 - **Biome** - Linting and formatting
 - **PWA** - Progressive Web App support
-- **Turborepo** - Optimized monorepo build system
 
 ## Getting Started
 

@@ -4,7 +4,7 @@
 {
   "$schema": "https://r2.better-t-stack.dev/schema.json",
   "version": "3.4.1",
-  "createdAt": "2025-11-13T15:16:03.760Z",
+  "createdAt": "2025-11-13T17:21:56.993Z",
   "database": "postgres",
   "orm": "drizzle",
   "backend": "elysia",
@@ -14,8 +14,7 @@
   ],
   "addons": [
     "biome",
-    "pwa",
-    "turborepo"
+    "pwa"
   ],
   "examples": [],
   "auth": "better-auth",
