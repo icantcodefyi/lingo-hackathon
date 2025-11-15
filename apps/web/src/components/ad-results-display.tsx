@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Download, Globe, AlertTriangle } from "lucide-react";
+import { useEffect, useState } from "react";
+import i18n from "@/lib/i18n";
 
 interface AdResult {
 	locale: string;
@@ -34,6 +36,21 @@ export function AdResultsDisplay({
 	onRunCompliance,
 	onExport,
 }: AdResultsDisplayProps) {
+	const [language, setLanguage] = useState(i18n.language);
+
+	useEffect(() => {
+		const handleLanguageChanged = (lng: string) => {
+			setLanguage(lng);
+		};
+
+		i18n.on("languageChanged", handleLanguageChanged);
+		return () => {
+			i18n.off("languageChanged", handleLanguageChanged);
+		};
+	}, []);
+
+	const t = (key: string) => i18n.t(key);
+
 	if (!results || results.length === 0) {
 		return null;
 	}
@@ -42,9 +59,9 @@ export function AdResultsDisplay({
 		<div className="space-y-6">
 			<div className="flex items-center justify-between animate-in fade-in slide-in-from-top-4 duration-500">
 				<div>
-					<h2 className="text-2xl font-bold text-white">Generated Ads</h2>
+					<h2 className="text-2xl font-bold text-white">{t("adResults.title")}</h2>
 					<p className="text-white/60">
-						{results.length} localized ad variations created
+						{results.length} {t("adResults.variationsCreated")}
 					</p>
 				</div>
 				<Button 
@@ -52,7 +69,7 @@ export function AdResultsDisplay({
 					className="bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all duration-200"
 				>
 					<Download className="mr-2 h-4 w-4" />
-					Export All
+					{t("adResults.exportAll")}
 				</Button>
 			</div>
 
@@ -80,11 +97,11 @@ export function AdResultsDisplay({
 						<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 							<CardHeader>
 								<CardTitle className="flex items-center justify-between text-white">
-									<span>Base Translation - {result.locale}</span>
+									<span>{t("adResults.baseTranslation")} - {result.locale}</span>
 									<Badge variant="outline" className="border-white/20 text-white/80">{result.config.formality}</Badge>
 								</CardTitle>
 								<CardDescription className="text-white/60">
-									Cultural tone: {result.config.tone}
+									{t("adResults.culturalTone")}: {result.config.tone}
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-4">
@@ -92,16 +109,16 @@ export function AdResultsDisplay({
 									<p className="text-lg text-white">{result.translatedCopy}</p>
 								</div>
 								<div className="rounded-lg border-l-4 border-blue-500 bg-blue-500/10 p-4 backdrop-blur-sm">
-									<p className="text-sm font-medium mb-1 text-white">Cultural Notes:</p>
+									<p className="text-sm font-medium mb-1 text-white">{t("adResults.culturalNotes")}:</p>
 									<p className="text-sm text-white/70">{result.culturalNotes}</p>
 								</div>
 								<div className="grid grid-cols-2 gap-2 text-sm text-white/80">
 									<div>
-										<span className="font-medium text-white">Emoji Tolerance:</span>{" "}
+										<span className="font-medium text-white">{t("adResults.emojiTolerance")}:</span>{" "}
 										{result.config.emojiTolerance}
 									</div>
 									<div>
-										<span className="font-medium text-white">CTA:</span>{" "}
+										<span className="font-medium text-white">{t("adResults.cta")}:</span>{" "}
 										{result.config.cta}
 									</div>
 								</div>
@@ -110,7 +127,7 @@ export function AdResultsDisplay({
 
 						<div className="space-y-4">
 							<h3 className="text-xl font-semibold text-white">
-								Platform-Specific Variations
+								{t("adResults.platformVariations")}
 							</h3>
 							{Object.entries(result.platformAds).map(
 								([platform, ad]: [string, any], index) => (
@@ -134,7 +151,7 @@ export function AdResultsDisplay({
 													className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-200"
 												>
 													<AlertTriangle className="mr-2 h-4 w-4" />
-													Check Compliance
+													{t("adResults.checkCompliance")}
 												</Button>
 											</CardTitle>
 										</CardHeader>

@@ -6,7 +6,6 @@
 import { generateObject } from "ai";
 import { openai } from "@ai-sdk/openai";
 import type {
-	ComplianceReport,
 	PatternMatchIssue,
 } from "../types/compliance.types";
 import { complianceReportSchema } from "../types/compliance.types";

@@ -14,5 +14,105 @@
   "header": {
     "lingoDev": "Lingo.dev",
     "github": "GitHub"
+  },
+  "rizzAds": {
+    "title": "Rizz Ads",
+    "subtitle": "Globale Anzeigenerstellung + Compliance-Engine",
+    "description": "Erstellen, lokalisieren und rechtlich validieren Sie Anzeigen für jeden Markt in Minuten",
+    "generatedAds": "Ihre erstellten Anzeigen",
+    "reviewAds": "Überprüfen Sie Ihre lokalisierten Anzeigen und prüfen Sie die Compliance",
+    "poweredBy": "Unterstützt von",
+    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
+  },
+  "adGenerator": {
+    "steps": {
+      "productInfo": {
+        "title": "Produktinfo",
+        "description": "Erzählen Sie uns von Ihrem Produkt"
+      },
+      "adCopy": {
+        "title": "Anzeigentext",
+        "description": "Ihr Basis-Anzeigeninhalt"
+      },
+      "targetMarkets": {
+        "title": "Zielmärkte",
+        "description": "Regionen & Plattformen auswählen"
+      }
+    },
+    "productInfo": {
+      "title": "Produktinformationen",
+      "subtitle": "Helfen Sie uns zu verstehen, was Sie bewerben",
+      "productName": "Produktname *",
+      "productNamePlaceholder": "z.B. AI Writer Pro",
+      "category": "Kategorie *",
+      "categoryPlaceholder": "z.B. Produktivitätssoftware",
+      "industry": "Branche *",
+      "industryPlaceholder": "z.B. SaaS, Finanzen, Gesundheitswesen",
+      "features": "Hauptfunktionen (optional)",
+      "featurePlaceholder": "z.B. KI-gestützte Inhaltserstellung",
+      "addFeature": "Funktion hinzufügen",
+      "benefits": "Hauptvorteile (optional)",
+      "benefitPlaceholder": "z.B. Spare 10 Stunden pro Woche",
+      "addBenefit": "Vorteil hinzufügen"
+    },
+    "adCopy": {
+      "title": "Basis-Anzeigentext",
+      "subtitle": "Gib deinen ursprünglichen Anzeigentext auf Englisch ein. Wir lokalisieren ihn für deine Zielmärkte.",
+      "label": "Anzeigentext *",
+      "placeholder": "z.B. Steigere deine Produktivität mit unserem KI-gestützten Schreibassistenten. Starte noch heute und spare 10 Stunden pro Woche!",
+      "characters": "Zeichen"
+    },
+    "targetMarkets": {
+      "title": "Zielmärkte & Plattformen",
+      "subtitle": "Wähle aus, wo du deine Anzeigen schalten möchtest",
+      "markets": "Zielmärkte *",
+      "selectAtLeastOneMarket": "Wähle mindestens einen Zielmarkt aus",
+      "marketsSelected": "Markt",
+      "marketsSelectedPlural": "Märkte",
+      "selected": "ausgewählt",
+      "platforms": "Werbeplattformen *",
+      "selectAtLeastOnePlatform": "Wähle mindestens eine Plattform aus",
+      "platformsSelected": "Plattform",
+      "platformsSelectedPlural": "Plattformen"
+    },
+    "navigation": {
+      "back": "Zurück",
+      "continue": "Weiter",
+      "generating": "Wird generiert...",
+      "generateAds": "Anzeigen generieren"
+    }
+  },
+  "adResults": {
+    "title": "Generierte Anzeigen",
+    "variationsCreated": "lokalisierte Anzeigenvarianten erstellt",
+    "exportAll": "Alle exportieren",
+    "baseTranslation": "Basisübersetzung",
+    "culturalTone": "Kultureller Ton",
+    "culturalNotes": "Kulturelle Hinweise",
+    "emojiTolerance": "Emoji-Toleranz",
+    "cta": "CTA",
+    "platformVariations": "Plattformspezifische Variationen",
+    "checkCompliance": "Compliance prüfen"
+  },
+  "compliance": {
+    "title": "Compliance-Berichte",
+    "adsAnalyzed": "Anzeige",
+    "adsAnalyzedPlural": "Anzeigen",
+    "analyzedFor": "auf Compliance geprüft",
+    "overallRisk": "Gesamtrisikobewertung",
+    "risk": "RISIKO",
+    "originalAdCopy": "Originaler Anzeigentext",
+    "patternMatchedIssues": "Musterabgleich-Probleme",
+    "patternMatchedDescription": "Probleme, die durch regelbasierten Musterabgleich erkannt wurden",
+    "matched": "Übereinstimmung",
+    "authority": "Autorität",
+    "aiDetectedIssues": "KI-erkannte Probleme",
+    "aiDetectedDescription": "Fortgeschrittene Compliance-Probleme, die durch KI-Analyse identifiziert wurden",
+    "noIssuesDetected": "Keine weiteren Probleme erkannt",
+    "rule": "Regel",
+    "suggestedFix": "Vorgeschlagene Lösung",
+    "compliantVersion": "Konforme Version",
+    "compliantDescription": "Automatisch korrigierter Anzeigentext, der alle Compliance-Probleme behebt",
+    "explanation": "Erklärung der Änderungen"
   }
 }

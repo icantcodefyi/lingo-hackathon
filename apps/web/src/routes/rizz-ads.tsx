@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { orpc, client } from "@/utils/orpc";
 import { authClient } from "@/lib/auth-client";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import ShaderBackground from "@/components/shader-background";
 import Header from "@/components/header";
 import { Sparkles } from "lucide-react";
+import i18n from "@/lib/i18n";
 
 export const Route = createFileRoute("/rizz-ads")({
 	component: RouteComponent,
@@ -27,6 +28,20 @@ export const Route = createFileRoute("/rizz-ads")({
 function RouteComponent() {
 	const [adResults, setAdResults] = useState<any>(null);
 	const [complianceReports, setComplianceReports] = useState<any[]>([]);
+	const [language, setLanguage] = useState(i18n.language);
+
+	useEffect(() => {
+		const handleLanguageChanged = (lng: string) => {
+			setLanguage(lng);
+		};
+
+		i18n.on("languageChanged", handleLanguageChanged);
+		return () => {
+			i18n.off("languageChanged", handleLanguageChanged);
+		};
+	}, []);
+
+	const t = (key: string) => i18n.t(key);
 
 	const { data: supportedLocales } = useQuery(
 		orpc.getSupportedLocales.queryOptions(),
@@ -123,15 +138,14 @@ function RouteComponent() {
 					<div className="mb-16 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
 						<div className="flex items-center justify-center gap-3 mb-4">
 							<h1 className="text-6xl font-bold text-white">
-								<span className="italic instrument">Rizz</span> Ads
+								<span className="italic instrument">Rizz</span> {t("rizzAds.title")}
 							</h1>
 						</div>
 						<p className="text-xl text-white/80 max-w-3xl mx-auto">
-							Global Ad Generation + Compliance Engine
+							{t("rizzAds.subtitle")}
 						</p>
 						<p className="text-base text-white/60 max-w-2xl mx-auto">
-							Create, localize, and legally validate ads for any market in
-							minutes
+							{t("rizzAds.description")}
 						</p>
 					</div>
 				)}
@@ -153,10 +167,10 @@ function RouteComponent() {
 						<>
 							<div className="text-center mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
 								<h2 className="text-3xl font-bold text-white mb-2">
-									Your Generated Ads
+									{t("rizzAds.generatedAds")}
 								</h2>
 								<p className="text-white/60">
-									Review your localized ads and check compliance
+									{t("rizzAds.reviewAds")}
 								</p>
 							</div>
 							<section className="animate-in fade-in slide-in-from-bottom-6 duration-500 delay-100">
@@ -179,9 +193,8 @@ function RouteComponent() {
 				{/* Powered by Section */}
 				<div className="mt-20 pt-8 border-t border-white/10 text-center animate-in fade-in duration-700 delay-300">
 					<p className="text-sm text-white/40">
-						Powered by{" "}
-						<span className="font-semibold text-white/60">Lingo.dev</span> +
-						OpenAI GPT-4 + Cultural AI
+						{t("rizzAds.poweredBy")}{" "}
+						<span className="font-semibold text-white/60">{t("rizzAds.poweredByTech")}</span>
 					</p>
 				</div>
 			</div>

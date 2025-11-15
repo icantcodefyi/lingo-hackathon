@@ -14,5 +14,105 @@
   "header": {
     "lingoDev": "Lingo.dev",
     "github": "GitHub"
+  },
+  "rizzAds": {
+    "title": "ريز آدز",
+    "subtitle": "محرك إنشاء الإعلانات العالمية + الامتثال القانوني",
+    "description": "أنشئ وطوّع وتحقق من صحة الإعلانات قانونياً لأي سوق في دقائق",
+    "generatedAds": "إعلاناتك المُنشأة",
+    "reviewAds": "راجع إعلاناتك المُطوّعة وتحقق من امتثالها",
+    "poweredBy": "مدعوم بواسطة",
+    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + الذكاء الاصطناعي الثقافي"
+  },
+  "adGenerator": {
+    "steps": {
+      "productInfo": {
+        "title": "معلومات المنتج",
+        "description": "أخبرنا عن منتجك"
+      },
+      "adCopy": {
+        "title": "نص الإعلان",
+        "description": "محتوى إعلانك الأساسي"
+      },
+      "targetMarkets": {
+        "title": "الأسواق المستهدفة",
+        "description": "اختر المناطق والمنصات"
+      }
+    },
+    "productInfo": {
+      "title": "معلومات المنتج",
+      "subtitle": "ساعدنا في فهم ما تقوم بالإعلان عنه",
+      "productName": "اسم المنتج *",
+      "productNamePlaceholder": "مثال: AI Writer Pro",
+      "category": "الفئة *",
+      "categoryPlaceholder": "مثال: برامج الإنتاجية",
+      "industry": "الصناعة *",
+      "industryPlaceholder": "مثال: البرمجيات كخدمة، التمويل، الرعاية الصحية",
+      "features": "الميزات الرئيسية (اختياري)",
+      "featurePlaceholder": "مثال: إنشاء محتوى مدعوم بالذكاء الاصطناعي",
+      "addFeature": "إضافة ميزة",
+      "benefits": "الفوائد الرئيسية (اختياري)",
+      "benefitPlaceholder": "مثال: وفّر 10 ساعات أسبوعيًا",
+      "addBenefit": "إضافة ميزة"
+    },
+    "adCopy": {
+      "title": "نص الإعلان الأساسي",
+      "subtitle": "أدخل نص إعلانك الأصلي باللغة الإنجليزية. سنقوم بتوطينه للأسواق المستهدفة.",
+      "label": "نص الإعلان *",
+      "placeholder": "مثال: عزز إنتاجيتك مع مساعد الكتابة المدعوم بالذكاء الاصطناعي. ابدأ اليوم ووفر 10 ساعات أسبوعيًا!",
+      "characters": "حرف"
+    },
+    "targetMarkets": {
+      "title": "الأسواق والمنصات المستهدفة",
+      "subtitle": "اختر أين تريد تشغيل إعلاناتك",
+      "markets": "الأسواق المستهدفة *",
+      "selectAtLeastOneMarket": "حدد سوقًا مستهدفًا واحدًا على الأقل",
+      "marketsSelected": "سوق",
+      "marketsSelectedPlural": "أسواق",
+      "selected": "محدد",
+      "platforms": "منصات الإعلان *",
+      "selectAtLeastOnePlatform": "حدد منصة واحدة على الأقل",
+      "platformsSelected": "منصة",
+      "platformsSelectedPlural": "منصات"
+    },
+    "navigation": {
+      "back": "رجوع",
+      "continue": "متابعة",
+      "generating": "جارٍ التوليد...",
+      "generateAds": "توليد الإعلانات"
+    }
+  },
+  "adResults": {
+    "title": "الإعلانات المُولّدة",
+    "variationsCreated": "تم إنشاء نسخ إعلانية مُوطّنة",
+    "exportAll": "تصدير الكل",
+    "baseTranslation": "الترجمة الأساسية",
+    "culturalTone": "النبرة الثقافية",
+    "culturalNotes": "ملاحظات ثقافية",
+    "emojiTolerance": "تقبل الرموز التعبيرية",
+    "cta": "دعوة للعمل",
+    "platformVariations": "تنويعات خاصة بالمنصة",
+    "checkCompliance": "التحقق من الامتثال"
+  },
+  "compliance": {
+    "title": "تقارير الامتثال",
+    "adsAnalyzed": "إعلان",
+    "adsAnalyzedPlural": "إعلانات",
+    "analyzedFor": "تم تحليلها للامتثال",
+    "overallRisk": "تقييم المخاطر الشامل",
+    "risk": "المخاطر",
+    "originalAdCopy": "نص الإعلان الأصلي",
+    "patternMatchedIssues": "مشكلات مطابقة النمط",
+    "patternMatchedDescription": "مشكلات تم اكتشافها بواسطة مطابقة النمط المستندة إلى القواعد",
+    "matched": "مطابق",
+    "authority": "السلطة",
+    "aiDetectedIssues": "مشكلات اكتشفها الذكاء الاصطناعي",
+    "aiDetectedDescription": "مشكلات امتثال متقدمة تم تحديدها بواسطة تحليل الذكاء الاصطناعي",
+    "noIssuesDetected": "لم يتم اكتشاف مشكلات إضافية",
+    "rule": "القاعدة",
+    "suggestedFix": "الإصلاح المقترح",
+    "compliantVersion": "النسخة المتوافقة",
+    "compliantDescription": "نص إعلان تم إصلاحه تلقائيًا يعالج جميع مشكلات الامتثال",
+    "explanation": "شرح التغييرات"
   }
 }

@@ -14,6 +14,106 @@
 	"header": {
 		"lingoDev": "Lingo.dev",
 		"github": "GitHub"
+	},
+	"rizzAds": {
+		"title": "Rizz Ads",
+		"subtitle": "Global Ad Generation + Compliance Engine",
+		"description": "Create, localize, and legally validate ads for any market in minutes",
+		"generatedAds": "Your Generated Ads",
+		"reviewAds": "Review your localized ads and check compliance",
+		"poweredBy": "Powered by",
+		"poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
+	},
+	"adGenerator": {
+		"steps": {
+			"productInfo": {
+				"title": "Product Info",
+				"description": "Tell us about your product"
+			},
+			"adCopy": {
+				"title": "Ad Copy",
+				"description": "Your base ad content"
+			},
+			"targetMarkets": {
+				"title": "Target Markets",
+				"description": "Select regions & platforms"
+			}
+		},
+		"productInfo": {
+			"title": "Product Information",
+			"subtitle": "Help us understand what you're advertising",
+			"productName": "Product Name *",
+			"productNamePlaceholder": "e.g., AI Writer Pro",
+			"category": "Category *",
+			"categoryPlaceholder": "e.g., Productivity Software",
+			"industry": "Industry *",
+			"industryPlaceholder": "e.g., SaaS, Finance, Healthcare",
+			"features": "Key Features (optional)",
+			"featurePlaceholder": "e.g., AI-powered content generation",
+			"addFeature": "Add Feature",
+			"benefits": "Key Benefits (optional)",
+			"benefitPlaceholder": "e.g., Save 10 hours per week",
+			"addBenefit": "Add Benefit"
+		},
+		"adCopy": {
+			"title": "Base Ad Copy",
+			"subtitle": "Enter your original ad copy in English. We'll localize it for your target markets.",
+			"label": "Ad Copy *",
+			"placeholder": "e.g., Boost your productivity with our AI-powered writing assistant. Get started today and save 10 hours per week!",
+			"characters": "characters"
+		},
+		"targetMarkets": {
+			"title": "Target Markets & Platforms",
+			"subtitle": "Choose where you want to run your ads",
+			"markets": "Target Markets *",
+			"selectAtLeastOneMarket": "Select at least one target market",
+			"marketsSelected": "market",
+			"marketsSelectedPlural": "markets",
+			"selected": "selected",
+			"platforms": "Ad Platforms *",
+			"selectAtLeastOnePlatform": "Select at least one platform",
+			"platformsSelected": "platform",
+			"platformsSelectedPlural": "platforms"
+		},
+		"navigation": {
+			"back": "Back",
+			"continue": "Continue",
+			"generating": "Generating...",
+			"generateAds": "Generate Ads"
+		}
+	},
+	"adResults": {
+		"title": "Generated Ads",
+		"variationsCreated": "localized ad variations created",
+		"exportAll": "Export All",
+		"baseTranslation": "Base Translation",
+		"culturalTone": "Cultural tone",
+		"culturalNotes": "Cultural Notes",
+		"emojiTolerance": "Emoji Tolerance",
+		"cta": "CTA",
+		"platformVariations": "Platform-Specific Variations",
+		"checkCompliance": "Check Compliance"
+	},
+	"compliance": {
+		"title": "Compliance Reports",
+		"adsAnalyzed": "ad",
+		"adsAnalyzedPlural": "ads",
+		"analyzedFor": "analyzed for compliance",
+		"overallRisk": "Overall Risk Assessment",
+		"risk": "RISK",
+		"originalAdCopy": "Original Ad Copy",
+		"patternMatchedIssues": "Pattern-Matched Issues",
+		"patternMatchedDescription": "Issues detected by rule-based pattern matching",
+		"matched": "Matched",
+		"authority": "Authority",
+		"aiDetectedIssues": "AI-Detected Issues",
+		"aiDetectedDescription": "Advanced compliance issues identified by AI analysis",
+		"noIssuesDetected": "No additional issues detected",
+		"rule": "Rule",
+		"suggestedFix": "Suggested Fix",
+		"compliantVersion": "Compliant Version",
+		"compliantDescription": "Auto-fixed ad copy that addresses all compliance issues",
+		"explanation": "Explanation of Changes"
 	}
 }
 

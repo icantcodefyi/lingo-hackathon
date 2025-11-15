@@ -14,5 +14,105 @@
   "header": {
     "lingoDev": "Lingo.dev",
     "github": "GitHub"
+  },
+  "rizzAds": {
+    "title": "Rizz Ads",
+    "subtitle": "全球广告生成与合规引擎",
+    "description": "在几分钟内创建、翻译并合法验证适用于任何市场的广告",
+    "generatedAds": "您生成的广告",
+    "reviewAds": "查看您的本地化广告并检查合规性",
+    "poweredBy": "技术支持",
+    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
+  },
+  "adGenerator": {
+    "steps": {
+      "productInfo": {
+        "title": "产品信息",
+        "description": "告诉我们您的产品信息"
+      },
+      "adCopy": {
+        "title": "广告文案",
+        "description": "您的基础广告内容"
+      },
+      "targetMarkets": {
+        "title": "目标市场",
+        "description": "选择地区和平台"
+      }
+    },
+    "productInfo": {
+      "title": "产品信息",
+      "subtitle": "帮助我们了解您正在推广的产品",
+      "productName": "产品名称 *",
+      "productNamePlaceholder": "例如：AI Writer Pro",
+      "category": "类别 *",
+      "categoryPlaceholder": "例如：生产力软件",
+      "industry": "行业 *",
+      "industryPlaceholder": "例如：SaaS、金融、医疗",
+      "features": "主要功能（可选）",
+      "featurePlaceholder": "例如：AI驱动的内容生成",
+      "addFeature": "添加功能",
+      "benefits": "主要优势（可选）",
+      "benefitPlaceholder": "例如，每周节省10小时",
+      "addBenefit": "添加优势"
+    },
+    "adCopy": {
+      "title": "基础广告文案",
+      "subtitle": "输入您的原始广告文案（英文）。我们会为您的目标市场进行本地化。",
+      "label": "广告文案 *",
+      "placeholder": "例如，使用我们基于AI的写作助手提升您的生产力。立即开始，每周节省10小时！",
+      "characters": "字符"
+    },
+    "targetMarkets": {
+      "title": "目标市场和平台",
+      "subtitle": "选择您希望投放广告的地方",
+      "markets": "目标市场 *",
+      "selectAtLeastOneMarket": "至少选择一个目标市场",
+      "marketsSelected": "市场",
+      "marketsSelectedPlural": "市场",
+      "selected": "已选择",
+      "platforms": "广告平台 *",
+      "selectAtLeastOnePlatform": "至少选择一个平台",
+      "platformsSelected": "平台",
+      "platformsSelectedPlural": "平台"
+    },
+    "navigation": {
+      "back": "返回",
+      "continue": "继续",
+      "generating": "生成中...",
+      "generateAds": "生成广告"
+    }
+  },
+  "adResults": {
+    "title": "生成的广告",
+    "variationsCreated": "已创建的本地化广告变体",
+    "exportAll": "导出全部",
+    "baseTranslation": "基础翻译",
+    "culturalTone": "文化语调",
+    "culturalNotes": "文化备注",
+    "emojiTolerance": "表情符号容忍度",
+    "cta": "行动号召（CTA）",
+    "platformVariations": "平台特定变体",
+    "checkCompliance": "检查合规性"
+  },
+  "compliance": {
+    "title": "合规报告",
+    "adsAnalyzed": "广告",
+    "adsAnalyzedPlural": "广告",
+    "analyzedFor": "合规性分析",
+    "overallRisk": "总体风险评估",
+    "risk": "风险",
+    "originalAdCopy": "原始广告文案",
+    "patternMatchedIssues": "模式匹配问题",
+    "patternMatchedDescription": "通过规则模式匹配检测到的问题",
+    "matched": "匹配",
+    "authority": "权威性",
+    "aiDetectedIssues": "AI检测问题",
+    "aiDetectedDescription": "通过AI分析识别的高级合规问题",
+    "noIssuesDetected": "未检测到其他问题",
+    "rule": "规则",
+    "suggestedFix": "建议修复",
+    "compliantVersion": "合规版本",
+    "compliantDescription": "解决所有合规性问题的自动修复广告文案",
+    "explanation": "变更说明"
   }
 }

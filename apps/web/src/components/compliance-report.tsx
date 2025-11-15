@@ -8,6 +8,8 @@ import {
 import { Badge } from "./ui/badge";
 import { AlertTriangle, CheckCircle2, XCircle, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { useEffect, useState } from "react";
+import i18n from "@/lib/i18n";
 
 interface ComplianceIssue {
 	issue: string;
@@ -42,6 +44,21 @@ interface ComplianceReportProps {
 }
 
 export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
+	const [language, setLanguage] = useState(i18n.language);
+
+	useEffect(() => {
+		const handleLanguageChanged = (lng: string) => {
+			setLanguage(lng);
+		};
+
+		i18n.on("languageChanged", handleLanguageChanged);
+		return () => {
+			i18n.off("languageChanged", handleLanguageChanged);
+		};
+	}, []);
+
+	const t = (key: string) => i18n.t(key);
+
 	if (!reports || reports.length === 0) {
 		return null;
 	}
@@ -88,10 +105,9 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 	return (
 		<div className="space-y-6">
 			<div className="animate-in fade-in slide-in-from-top-4 duration-500">
-				<h2 className="text-2xl font-bold text-white">Compliance Reports</h2>
+				<h2 className="text-2xl font-bold text-white">{t("compliance.title")}</h2>
 				<p className="text-white/60">
-					{reports.length} ad{reports.length !== 1 ? "s" : ""} analyzed for
-					compliance
+					{reports.length} {reports.length !== 1 ? t("compliance.adsAnalyzedPlural") : t("compliance.adsAnalyzed")} {t("compliance.analyzedFor")}
 				</p>
 			</div>
 
@@ -117,14 +133,14 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 						<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 							<CardHeader>
 								<CardTitle className="flex items-center justify-between text-white">
-									<span>Overall Risk Assessment</span>
+									<span>{t("compliance.overallRisk")}</span>
 									<Badge
 										variant={
 											getRiskBadgeVariant(report.aiAnalysis.overallRisk) as any
 										}
 										className="animate-in fade-in duration-300"
 									>
-										{report.aiAnalysis.overallRisk.toUpperCase()} RISK
+										{report.aiAnalysis.overallRisk.toUpperCase()} {t("compliance.risk")}
 									</Badge>
 								</CardTitle>
 								<CardDescription className="text-white/60">
@@ -133,7 +149,7 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 							</CardHeader>
 							<CardContent className="space-y-4">
 								<div>
-									<p className="text-sm font-medium mb-2 text-white">Original Ad Copy:</p>
+									<p className="text-sm font-medium mb-2 text-white">{t("compliance.originalAdCopy")}:</p>
 									<div className="rounded-lg bg-white/10 p-3 text-sm text-white border border-white/10">
 										{report.adCopy}
 									</div>

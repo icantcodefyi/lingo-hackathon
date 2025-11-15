@@ -14,5 +14,105 @@
   "header": {
     "lingoDev": "Lingo.dev",
     "github": "GitHub"
+  },
+  "rizzAds": {
+    "title": "Rizz Ads",
+    "subtitle": "Motor de generación y cumplimiento de anuncios globales",
+    "description": "Crea, localiza y valida legalmente anuncios para cualquier mercado en minutos",
+    "generatedAds": "Tus anuncios generados",
+    "reviewAds": "Revisa tus anuncios localizados y verifica su cumplimiento",
+    "poweredBy": "Desarrollado por",
+    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + IA cultural"
+  },
+  "adGenerator": {
+    "steps": {
+      "productInfo": {
+        "title": "Información del producto",
+        "description": "Cuéntanos sobre tu producto"
+      },
+      "adCopy": {
+        "title": "Texto publicitario",
+        "description": "Tu contenido publicitario base"
+      },
+      "targetMarkets": {
+        "title": "Mercados objetivo",
+        "description": "Selecciona regiones y plataformas"
+      }
+    },
+    "productInfo": {
+      "title": "Información del producto",
+      "subtitle": "Ayúdanos a entender qué estás anunciando",
+      "productName": "Nombre del producto *",
+      "productNamePlaceholder": "p. ej., AI Writer Pro",
+      "category": "Categoría *",
+      "categoryPlaceholder": "p. ej., Software de productividad",
+      "industry": "Industria *",
+      "industryPlaceholder": "p. ej., SaaS, Finanzas, Salud",
+      "features": "Características principales (opcional)",
+      "featurePlaceholder": "p. ej., Generación de contenido con IA",
+      "addFeature": "Añadir característica",
+      "benefits": "Beneficios principales (opcional)",
+      "benefitPlaceholder": "p. ej., Ahorra 10 horas por semana",
+      "addBenefit": "Añadir beneficio"
+    },
+    "adCopy": {
+      "title": "Texto base del anuncio",
+      "subtitle": "Introduce tu texto original del anuncio en inglés. Lo localizaremos para tus mercados objetivo.",
+      "label": "Texto del anuncio *",
+      "placeholder": "p. ej., Aumenta tu productividad con nuestro asistente de escritura potenciado por IA. ¡Comienza hoy y ahorra 10 horas por semana!",
+      "characters": "caracteres"
+    },
+    "targetMarkets": {
+      "title": "Mercados y plataformas objetivo",
+      "subtitle": "Elige dónde quieres publicar tus anuncios",
+      "markets": "Mercados objetivo *",
+      "selectAtLeastOneMarket": "Selecciona al menos un mercado objetivo",
+      "marketsSelected": "mercado",
+      "marketsSelectedPlural": "mercados",
+      "selected": "seleccionado",
+      "platforms": "Plataformas de anuncios *",
+      "selectAtLeastOnePlatform": "Selecciona al menos una plataforma",
+      "platformsSelected": "plataforma",
+      "platformsSelectedPlural": "plataformas"
+    },
+    "navigation": {
+      "back": "Atrás",
+      "continue": "Continuar",
+      "generating": "Generando...",
+      "generateAds": "Generar anuncios"
+    }
+  },
+  "adResults": {
+    "title": "Anuncios generados",
+    "variationsCreated": "variaciones de anuncios localizadas creadas",
+    "exportAll": "Exportar todo",
+    "baseTranslation": "Traducción base",
+    "culturalTone": "Tono cultural",
+    "culturalNotes": "Notas culturales",
+    "emojiTolerance": "Tolerancia de emojis",
+    "cta": "CTA",
+    "platformVariations": "Variaciones específicas de plataforma",
+    "checkCompliance": "Verificar cumplimiento"
+  },
+  "compliance": {
+    "title": "Informes de cumplimiento",
+    "adsAnalyzed": "anuncio",
+    "adsAnalyzedPlural": "anuncios",
+    "analyzedFor": "analizado para cumplimiento",
+    "overallRisk": "Evaluación general de riesgo",
+    "risk": "RIESGO",
+    "originalAdCopy": "Texto original del anuncio",
+    "patternMatchedIssues": "Problemas detectados por patrones",
+    "patternMatchedDescription": "Problemas detectados mediante coincidencia de patrones basada en reglas",
+    "matched": "Coincidencia",
+    "authority": "Autoridad",
+    "aiDetectedIssues": "Problemas detectados por IA",
+    "aiDetectedDescription": "Problemas avanzados de cumplimiento identificados por análisis de IA",
+    "noIssuesDetected": "No se detectaron problemas adicionales",
+    "rule": "Regla",
+    "suggestedFix": "Corrección sugerida",
+    "compliantVersion": "Versión conforme",
+    "compliantDescription": "Texto del anuncio corregido automáticamente que aborda todos los problemas de cumplimiento",
+    "explanation": "Explicación de cambios"
   }
 }

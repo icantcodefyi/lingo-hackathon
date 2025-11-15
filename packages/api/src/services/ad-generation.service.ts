@@ -5,10 +5,8 @@
 
 import type {
 	AdGenerationRequest,
-	AdGenerationResponse,
 	LocalizedAdVariant,
 	LocaleCode,
-	PlatformId,
 } from "../types/ad-generation.types";
 import { getRegionConfig } from "../config/region.config";
 import { getPlatformConfig, PLATFORM_CONFIGS } from "../config/platform.config";
