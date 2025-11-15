@@ -1,34 +1,66 @@
 /**
  * Translation service for culturally-adapted ad copy
- * Handles translation and cultural localization
+ * Handles translation and cultural localization using Lingo.dev SDK
  */
 
-import { generateObject } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { LingoDotDevEngine } from "lingo.dev/sdk";
 import type {
 	TranslationResult,
 	LocaleCode,
 	ProductDetails,
 	RegionConfig,
 } from "../types/ad-generation.types";
-import { translationOutputSchema } from "../types/ad-generation.types";
 import {
-	handleExternalApiError,
 	handleGenerationError,
 	retryWithBackoff,
 } from "../utils/error-handler";
 
 /**
- * Translation service configuration
+ * Initialize Lingo.dev SDK instance
  */
-const TRANSLATION_CONFIG = {
-	model: "gpt-4o",
-	maxRetries: 3,
-	timeout: 30000,
-};
+const getLingoEngine = (() => {
+	let engine: LingoDotDevEngine | null = null;
+	return () => {
+		if (!engine) {
+			const apiKey = process.env.LINGODOTDEV_API_KEY;
+			if (!apiKey) {
+				throw new Error(
+					"LINGODOTDEV_API_KEY environment variable is required",
+				);
+			}
+			engine = new LingoDotDevEngine({
+				apiKey,
+				batchSize: 100,
+				idealBatchItemSize: 1000,
+			});
+		}
+		return engine;
+	};
+})();
 
 /**
- * Translate and culturally adapt ad copy
+ * Convert locale code from format "en-US" to "en" for Lingo.dev
+ */
+function convertLocaleForLingo(locale: LocaleCode): string {
+	// Extract language code from locale (e.g., "en-US" -> "en")
+	const languageCode = locale.split("-")[0];
+	if (!languageCode) {
+		throw new Error(`Invalid locale format: ${locale}`);
+	}
+	return languageCode.toLowerCase();
+}
+
+/**
+ * Get source locale for translation
+ * Base copy is always assumed to be in English
+ */
+function getSourceLocale(): string {
+	// Base copy is always in English, so source is always "en"
+	return "en";
+}
+
+/**
+ * Translate and culturally adapt ad copy using Lingo.dev
  */
 export async function translateAdCopy(params: {
 	baseCopy: string;
@@ -41,29 +73,43 @@ export async function translateAdCopy(params: {
 	const {
 		baseCopy,
 		locale,
-		productDetails,
+		productDetails: _productDetails, // Keep for API compatibility but not used in Lingo.dev translation
 		regionConfig,
 		brandVoice,
 		additionalContext,
 	} = params;
 
 	try {
-		const result = await retryWithBackoff(async () => {
-			const { object } = await generateObject({
-				model: openai(TRANSLATION_CONFIG.model),
-				schema: translationOutputSchema,
-				prompt: buildTranslationPrompt({
-					baseCopy,
-					locale,
-					productDetails,
-					regionConfig,
-					brandVoice,
-					additionalContext,
-				}),
-			});
+		const lingoEngine = getLingoEngine();
+		const sourceLocale = getSourceLocale();
+		const targetLocale = convertLocaleForLingo(locale);
 
-			return object;
-		}, TRANSLATION_CONFIG.maxRetries);
+		// Use Lingo.dev to translate the text
+		const translatedText = await retryWithBackoff(
+			async () => {
+				return await lingoEngine.localizeText(baseCopy, {
+					sourceLocale,
+					targetLocale,
+					fast: false, // Prioritize quality for ad copy
+				});
+			},
+			3, // maxRetries
+		);
+
+		// Generate cultural notes based on region config and adaptations
+		const culturalNotes = buildCulturalNotes({
+			regionConfig,
+			originalCopy: baseCopy,
+			translatedCopy: translatedText,
+			brandVoice,
+			additionalContext,
+		});
+
+		const result: TranslationResult = {
+			translation: translatedText,
+			culturalNotes,
+			confidence: 0.9, // Lingo.dev provides high-quality translations
+		};
 
 		return result;
 	} catch (error) {
@@ -72,91 +118,103 @@ export async function translateAdCopy(params: {
 }
 
 /**
- * Build the translation prompt for the AI
+ * Build cultural notes based on region config and translation
  */
-function buildTranslationPrompt(params: {
-	baseCopy: string;
-	locale: LocaleCode;
-	productDetails: ProductDetails;
+function buildCulturalNotes(params: {
 	regionConfig: RegionConfig;
+	originalCopy: string;
+	translatedCopy: string;
 	brandVoice?: string;
 	additionalContext?: string;
 }): string {
-	const {
-		baseCopy,
-		locale,
-		productDetails,
-		regionConfig,
-		brandVoice,
-		additionalContext,
-	} = params;
+	const { regionConfig, brandVoice, additionalContext } = params;
 
-	return `You are a professional translator and cultural adaptation expert specializing in advertising localization.
+	const notes: string[] = [];
 
-Your task is to translate and culturally adapt advertising copy to resonate with the target market.
+	// Add region-specific cultural notes
+	if (regionConfig.culturalNotes && regionConfig.culturalNotes.length > 0) {
+		notes.push(...regionConfig.culturalNotes);
+	}
 
-## Original Ad Copy
-"${baseCopy}"
+	// Add tone and formality information
+	notes.push(`Translation adapted for ${regionConfig.tone} tone`);
+	notes.push(`Formality level: ${regionConfig.formality}`);
+	notes.push(`Emoji tolerance: ${regionConfig.emojiTolerance}`);
 
-## Product Information
-- Name: ${productDetails.name}
-- Category: ${productDetails.category}
-- Features: ${productDetails.features.join(", ")}
-- Benefits: ${productDetails.benefits.join(", ")}
-${productDetails.targetAudience ? `- Target Audience: ${productDetails.targetAudience}` : ""}
-${productDetails.pricePoint ? `- Price Point: ${productDetails.pricePoint}` : ""}
+	// Add brand voice context if provided
+	if (brandVoice) {
+		notes.push(`Brand voice considerations: ${brandVoice}`);
+	}
 
-## Target Market: ${locale}
+	// Add additional context if provided
+	if (additionalContext) {
+		notes.push(`Additional context: ${additionalContext}`);
+	}
 
-## Cultural Guidelines
-- Tone: ${regionConfig.tone}
-- Emoji Usage: ${regionConfig.emojiTolerance}
-- Formality Level: ${regionConfig.formality}
-- Preferred CTA: "${regionConfig.cta}"
-${regionConfig.culturalNotes ? `\n- Cultural Notes:\n${regionConfig.culturalNotes.map((note) => `  • ${note}`).join("\n")}` : ""}
 
-${brandVoice ? `## Brand Voice\n${brandVoice}\n` : ""}
-${additionalContext ? `## Additional Context\n${additionalContext}\n` : ""}
 
-## Your Mission
-1. **Translate Accurately**: Maintain the core message and value proposition
-2. **Adapt Culturally**: Adjust idioms, references, and expressions for local relevance
-3. **Match Tone**: Ensure the tone aligns with local advertising norms
-4. **Optimize Emoji Usage**: Apply appropriate emoji density (${regionConfig.emojiTolerance})
-5. **Set Formality**: Match the expected formality level (${regionConfig.formality})
-6. **Preserve Persuasiveness**: Keep the emotional and persuasive power of the original
-7. **Natural Language**: Ensure it sounds native, not translated
-
-## Output Requirements
-- Provide the culturally adapted translation
-- Include brief cultural notes explaining key adaptations you made
-- If possible, rate your confidence in the translation (0-1)
-- Optionally provide alternative translations if there are multiple good options
-
-Think like a native marketing professional in ${locale}, not just a translator.`;
+	return notes.join(". ") + ".";
 }
 
 /**
- * Batch translate multiple ad copies
+ * Batch translate multiple ad copies using Lingo.dev
  */
 export async function batchTranslate(
 	copies: string[],
 	locale: LocaleCode,
-	productDetails: ProductDetails,
+	productDetails: ProductDetails, // Keep for API compatibility but not used in Lingo.dev translation
 	regionConfig: RegionConfig,
 ) {
-	const translations = await Promise.all(
-		copies.map((copy) =>
-			translateAdCopy({
-				baseCopy: copy,
-				locale,
-				productDetails,
-				regionConfig,
-			}),
-		),
-	);
+	// productDetails is kept for API compatibility but not used in Lingo.dev translation
+	void productDetails;
+	try {
+		const lingoEngine = getLingoEngine();
+		const sourceLocale = getSourceLocale();
+		const targetLocale = convertLocaleForLingo(locale);
 
-	return translations;
+		// Use Lingo.dev batch translation for efficiency
+		const translatedTexts = await retryWithBackoff(
+			async () => {
+				// Translate all copies in parallel using batchLocalizeText
+				const results = await Promise.all(
+					copies.map((copy) =>
+						lingoEngine.localizeText(copy, {
+							sourceLocale,
+							targetLocale,
+							fast: false,
+						}),
+					),
+				);
+				return results;
+			},
+			3, // maxRetries
+		);
+
+		// Build translation results with cultural notes
+		const translations: TranslationResult[] = translatedTexts.map(
+			(translatedText, index) => {
+				const originalCopy = copies[index];
+				if (!originalCopy) {
+					throw new Error(`Missing original copy at index ${index}`);
+				}
+				const culturalNotes = buildCulturalNotes({
+					regionConfig,
+					originalCopy,
+					translatedCopy: translatedText,
+				});
+
+				return {
+					translation: translatedText,
+					culturalNotes,
+					confidence: 0.9,
+				};
+			},
+		);
+
+		return translations;
+	} catch (error) {
+		throw handleGenerationError(error, `batch translation to ${locale}`);
+	}
 }
 
 /**
