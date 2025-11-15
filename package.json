@@ -34,6 +34,9 @@
     "db:migrate": "bun run --filter @my-better-t-app/db db:migrate"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.44",
+    "@ai-sdk/openai": "^2.0.67",
+    "ai": "^5.0.93",
     "dotenv": "^17.2.2",
     "zod": "^4.1.11"
   },
