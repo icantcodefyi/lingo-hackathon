@@ -26,11 +26,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   head: () => ({
     meta: [
       {
-        title: "my-better-t-app",
+        title: "Rizz Ads",
       },
       {
         name: "description",
-        content: "my-better-t-app is a web application",
+        content: "rizz ads is the best platform for rizzly ads",
       },
     ],
     links: [
