@@ -1,9 +1,9 @@
-import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import ShaderBackground from "@/components/shader-background";
 import Header from "@/components/header";
+import ShaderBackground from "@/components/shader-background";
+import { authClient } from "@/lib/auth-client";
+import { orpc } from "@/utils/orpc";
 
 export const Route = createFileRoute("/dashboard")({
 	component: RouteComponent,
@@ -27,15 +27,15 @@ function RouteComponent() {
 	return (
 		<ShaderBackground>
 			<Header />
-			<div className="relative z-10 container mx-auto px-6 py-12">
-				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 animate-in fade-in slide-in-from-bottom-8 duration-700 hover:border-white/20 transition-all">
-					<h1 className="text-4xl font-bold text-white mb-4 animate-in fade-in slide-in-from-left-4 duration-500">
+			<div className="container relative z-10 mx-auto px-6 py-12">
+				<div className="fade-in slide-in-from-bottom-8 animate-in rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-700 hover:border-white/20">
+					<h1 className="fade-in slide-in-from-left-4 mb-4 animate-in font-bold text-4xl text-white duration-500">
 						Dashboard
 					</h1>
-					<p className="text-white/80 text-lg mb-2 animate-in fade-in slide-in-from-left-4 duration-500 delay-100">
+					<p className="fade-in slide-in-from-left-4 mb-2 animate-in text-lg text-white/80 delay-100 duration-500">
 						Welcome {session.data?.user.name}
 					</p>
-					<p className="text-white/60 animate-in fade-in slide-in-from-left-4 duration-500 delay-200">
+					<p className="fade-in slide-in-from-left-4 animate-in text-white/60 delay-200 duration-500">
 						API: {privateData.data?.message}
 					</p>
 				</div>

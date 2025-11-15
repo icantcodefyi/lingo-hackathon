@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import {
+	Check,
+	ChevronLeft,
+	ChevronRight,
+	Plus,
+	Sparkles,
+	X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import i18n from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { Badge } from "./ui/badge";
-import { cn } from "@/lib/utils";
-import {
-	ChevronRight,
-	ChevronLeft,
-	Check,
-	Sparkles,
-	Plus,
-	X,
-} from "lucide-react";
-import i18n from "@/lib/i18n";
 
 interface AdGeneratorStepperProps {
 	onGenerate: (data: {
@@ -35,9 +35,21 @@ interface AdGeneratorStepperProps {
 
 // Steps will be translated dynamically
 const getSteps = (t: (key: string) => string) => [
-	{ id: 1, title: t("adGenerator.steps.productInfo.title"), description: t("adGenerator.steps.productInfo.description") },
-	{ id: 2, title: t("adGenerator.steps.adCopy.title"), description: t("adGenerator.steps.adCopy.description") },
-	{ id: 3, title: t("adGenerator.steps.targetMarkets.title"), description: t("adGenerator.steps.targetMarkets.description") },
+	{
+		id: 1,
+		title: t("adGenerator.steps.productInfo.title"),
+		description: t("adGenerator.steps.productInfo.description"),
+	},
+	{
+		id: 2,
+		title: t("adGenerator.steps.adCopy.title"),
+		description: t("adGenerator.steps.adCopy.description"),
+	},
+	{
+		id: 3,
+		title: t("adGenerator.steps.targetMarkets.title"),
+		description: t("adGenerator.steps.targetMarkets.description"),
+	},
 ];
 
 export function AdGeneratorStepper({
@@ -47,7 +59,7 @@ export function AdGeneratorStepper({
 	supportedPlatforms = [],
 }: AdGeneratorStepperProps) {
 	const [currentStep, setCurrentStep] = useState(1);
-	const [language, setLanguage] = useState(i18n.language);
+	const [_language, setLanguage] = useState(i18n.language);
 	const [formData, setFormData] = useState({
 		productName: "",
 		productCategory: "",
@@ -178,12 +190,12 @@ export function AdGeneratorStepper({
 	};
 
 	return (
-		<div className="max-w-3xl mx-auto">
+		<div className="mx-auto max-w-3xl">
 			{/* Progress Steps */}
 			<div className="mb-12">
-				<div className="flex items-center justify-between relative">
+				<div className="relative flex items-center justify-between">
 					{/* Progress Line */}
-					<div className="absolute top-5 left-0 right-0 h-[2px] bg-white/10">
+					<div className="absolute top-5 right-0 left-0 h-[2px] bg-white/10">
 						<div
 							className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out"
 							style={{
@@ -192,62 +204,64 @@ export function AdGeneratorStepper({
 						/>
 					</div>
 
-				{/* Step Indicators */}
-				{steps.map((step, index) => {
-					const isCompleted = currentStep > step.id;
-					const isCurrent = currentStep === step.id;
+					{/* Step Indicators */}
+					{steps.map((step, _index) => {
+						const isCompleted = currentStep > step.id;
+						const isCurrent = currentStep === step.id;
 
-					return (
-						<div
-							key={step.id}
-							className="flex flex-col items-center relative z-10"
-						>
+						return (
 							<div
-							className={cn(
-								"w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 mb-2",
-								isCompleted &&
-									"bg-primary",
-								isCurrent &&
-									"bg-white/20 backdrop-blur-sm ring-2 ring-white/40",
-								!isCompleted && !isCurrent && "bg-white/5 backdrop-blur-sm",
-							)}
+								key={step.id}
+								className="relative z-10 flex flex-col items-center"
 							>
-								{isCompleted ? (
-									<Check className="w-5 h-5 text-white animate-in zoom-in duration-300" />
-								) : (
-									<span className="text-white font-medium">{step.id}</span>
-								)}
-							</div>
-							<div className="text-center">
-								<p
+								<div
 									className={cn(
-										"text-sm font-medium transition-all duration-300",
-										isCurrent ? "text-white" : "text-white/50",
+										"mb-2 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-500",
+										isCompleted && "bg-primary",
+										isCurrent &&
+											"bg-white/20 ring-2 ring-white/40 backdrop-blur-sm",
+										!isCompleted && !isCurrent && "bg-white/5 backdrop-blur-sm",
 									)}
 								>
-									{step.title}
-								</p>
-								<p className="text-xs text-white/30 mt-1 hidden sm:block transition-opacity duration-300">
-									{step.description}
-								</p>
+									{isCompleted ? (
+										<Check className="zoom-in h-5 w-5 animate-in text-white duration-300" />
+									) : (
+										<span className="font-medium text-white">{step.id}</span>
+									)}
+								</div>
+								<div className="text-center">
+									<p
+										className={cn(
+											"font-medium text-sm transition-all duration-300",
+											isCurrent ? "text-white" : "text-white/50",
+										)}
+									>
+										{step.title}
+									</p>
+									<p className="mt-1 hidden text-white/30 text-xs transition-opacity duration-300 sm:block">
+										{step.description}
+									</p>
+								</div>
 							</div>
-						</div>
-					);
-				})}
+						);
+					})}
 				</div>
 			</div>
 
 			{/* Form Content */}
 			<form onSubmit={handleSubmit} className="space-y-8">
-				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 min-h-[500px] transition-all duration-300 hover:border-white/20">
+				<div className="min-h-[500px] rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-300 hover:border-white/20">
 					{/* Step 1: Product Details */}
 					{currentStep === 1 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-1">
+						<div
+							className="fade-in slide-in-from-right-4 animate-in space-y-6 duration-500"
+							key="step-1"
+						>
 							<div>
-								<h2 className="text-2xl font-semibold text-white mb-2">
+								<h2 className="mb-2 font-semibold text-2xl text-white">
 									{t("adGenerator.productInfo.title")}
 								</h2>
-								<p className="text-white/60 text-sm">
+								<p className="text-sm text-white/60">
 									{t("adGenerator.productInfo.subtitle")}
 								</p>
 							</div>
@@ -266,8 +280,10 @@ export function AdGeneratorStepper({
 												productName: e.target.value,
 											}))
 										}
-										placeholder={t("adGenerator.productInfo.productNamePlaceholder")}
-										className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors"
+										placeholder={t(
+											"adGenerator.productInfo.productNamePlaceholder",
+										)}
+										className="border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 									/>
 								</div>
 
@@ -284,8 +300,10 @@ export function AdGeneratorStepper({
 												productCategory: e.target.value,
 											}))
 										}
-										placeholder={t("adGenerator.productInfo.categoryPlaceholder")}
-										className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors"
+										placeholder={t(
+											"adGenerator.productInfo.categoryPlaceholder",
+										)}
+										className="border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 									/>
 								</div>
 
@@ -302,8 +320,10 @@ export function AdGeneratorStepper({
 												industry: e.target.value,
 											}))
 										}
-										placeholder={t("adGenerator.productInfo.industryPlaceholder")}
-										className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors"
+										placeholder={t(
+											"adGenerator.productInfo.industryPlaceholder",
+										)}
+										className="border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 									/>
 								</div>
 
@@ -313,14 +333,19 @@ export function AdGeneratorStepper({
 									</Label>
 									<div className="space-y-2">
 										{formData.features.map((feature, index) => (
-											<div key={index} className="flex gap-2">
+											<div
+												key={`feature-${index}-${feature}`}
+												className="flex gap-2"
+											>
 												<Input
 													value={feature}
 													onChange={(e) =>
 														handleFeatureChange(index, e.target.value)
 													}
-													placeholder={t("adGenerator.productInfo.featurePlaceholder")}
-													className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors"
+													placeholder={t(
+														"adGenerator.productInfo.featurePlaceholder",
+													)}
+													className="border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 												/>
 												{formData.features.length > 1 && (
 													<Button
@@ -328,7 +353,7 @@ export function AdGeneratorStepper({
 														variant="ghost"
 														size="icon"
 														onClick={() => handleRemoveFeature(index)}
-														className="text-white/60 hover:text-white hover:bg-white/10"
+														className="text-white/60 hover:bg-white/10 hover:text-white"
 													>
 														<X className="h-4 w-4" />
 													</Button>
@@ -340,9 +365,9 @@ export function AdGeneratorStepper({
 											variant="ghost"
 											size="sm"
 											onClick={handleAddFeature}
-											className="text-white/60 hover:text-white hover:bg-white/10"
+											className="text-white/60 hover:bg-white/10 hover:text-white"
 										>
-											<Plus className="h-4 w-4 mr-2" />
+											<Plus className="mr-2 h-4 w-4" />
 											{t("adGenerator.productInfo.addFeature")}
 										</Button>
 									</div>
@@ -354,14 +379,19 @@ export function AdGeneratorStepper({
 									</Label>
 									<div className="space-y-2">
 										{formData.benefits.map((benefit, index) => (
-											<div key={index} className="flex gap-2">
+											<div
+												key={`benefit-${index}-${benefit}`}
+												className="flex gap-2"
+											>
 												<Input
 													value={benefit}
 													onChange={(e) =>
 														handleBenefitChange(index, e.target.value)
 													}
-													placeholder={t("adGenerator.productInfo.benefitPlaceholder")}
-													className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors"
+													placeholder={t(
+														"adGenerator.productInfo.benefitPlaceholder",
+													)}
+													className="border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 												/>
 												{formData.benefits.length > 1 && (
 													<Button
@@ -369,7 +399,7 @@ export function AdGeneratorStepper({
 														variant="ghost"
 														size="icon"
 														onClick={() => handleRemoveBenefit(index)}
-														className="text-white/60 hover:text-white hover:bg-white/10"
+														className="text-white/60 hover:bg-white/10 hover:text-white"
 													>
 														<X className="h-4 w-4" />
 													</Button>
@@ -381,9 +411,9 @@ export function AdGeneratorStepper({
 											variant="ghost"
 											size="sm"
 											onClick={handleAddBenefit}
-											className="text-white/60 hover:text-white hover:bg-white/10"
+											className="text-white/60 hover:bg-white/10 hover:text-white"
 										>
-											<Plus className="h-4 w-4 mr-2" />
+											<Plus className="mr-2 h-4 w-4" />
 											{t("adGenerator.productInfo.addBenefit")}
 										</Button>
 									</div>
@@ -394,12 +424,15 @@ export function AdGeneratorStepper({
 
 					{/* Step 2: Ad Copy */}
 					{currentStep === 2 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-2">
+						<div
+							className="fade-in slide-in-from-right-4 animate-in space-y-6 duration-500"
+							key="step-2"
+						>
 							<div>
-								<h2 className="text-2xl font-semibold text-white mb-2">
+								<h2 className="mb-2 font-semibold text-2xl text-white">
 									{t("adGenerator.adCopy.title")}
 								</h2>
-								<p className="text-white/60 text-sm">
+								<p className="text-sm text-white/60">
 									{t("adGenerator.adCopy.subtitle")}
 								</p>
 							</div>
@@ -418,10 +451,11 @@ export function AdGeneratorStepper({
 										}))
 									}
 									placeholder={t("adGenerator.adCopy.placeholder")}
-									className="min-h-[300px] bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 transition-colors resize-none"
+									className="min-h-[300px] resize-none border-white/20 bg-white/10 text-white transition-colors placeholder:text-white/40 focus:bg-white/15"
 								/>
-								<p className="text-xs text-white/40">
-									{formData.baseCopy.length} {t("adGenerator.adCopy.characters")}
+								<p className="text-white/40 text-xs">
+									{formData.baseCopy.length}{" "}
+									{t("adGenerator.adCopy.characters")}
 								</p>
 							</div>
 						</div>
@@ -429,20 +463,25 @@ export function AdGeneratorStepper({
 
 					{/* Step 3: Target Markets & Platforms */}
 					{currentStep === 3 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-3">
+						<div
+							className="fade-in slide-in-from-right-4 animate-in space-y-6 duration-500"
+							key="step-3"
+						>
 							<div>
-								<h2 className="text-2xl font-semibold text-white mb-2">
+								<h2 className="mb-2 font-semibold text-2xl text-white">
 									{t("adGenerator.targetMarkets.title")}
 								</h2>
-								<p className="text-white/60 text-sm">
+								<p className="text-sm text-white/60">
 									{t("adGenerator.targetMarkets.subtitle")}
 								</p>
 							</div>
 
 							<div className="space-y-5">
 								<div className="space-y-3">
-									<Label className="text-white/90">{t("adGenerator.targetMarkets.markets")}</Label>
-									<div className="flex flex-wrap gap-2 max-h-[200px] overflow-y-auto p-4 bg-white/5 rounded-lg border border-white/10">
+									<Label className="text-white/90">
+										{t("adGenerator.targetMarkets.markets")}
+									</Label>
+									<div className="flex max-h-[200px] flex-wrap gap-2 overflow-y-auto rounded-lg border border-white/10 bg-white/5 p-4">
 										{supportedLocales.map((locale) => (
 											<Badge
 												key={locale.code}
@@ -454,8 +493,8 @@ export function AdGeneratorStepper({
 												className={cn(
 													"cursor-pointer transition-all duration-300",
 													formData.selectedLocales.includes(locale.code)
-														? "bg-primary border-0 text-white animate-in fade-in duration-200"
-														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20 hover:border-white/30",
+														? "fade-in animate-in border-0 bg-primary text-white duration-200"
+														: "border-white/20 bg-white/10 text-white/70 hover:border-white/30 hover:bg-white/20",
 												)}
 												onClick={() => handleLocaleToggle(locale.code)}
 											>
@@ -472,14 +511,20 @@ export function AdGeneratorStepper({
 									)}
 									{formData.selectedLocales.length > 0 && (
 										<p className="text-sm text-white/60">
-											{formData.selectedLocales.length} {formData.selectedLocales.length > 1 ? t("adGenerator.targetMarkets.marketsSelectedPlural") : t("adGenerator.targetMarkets.marketsSelected")} {t("adGenerator.targetMarkets.selected")}
+											{formData.selectedLocales.length}{" "}
+											{formData.selectedLocales.length > 1
+												? t("adGenerator.targetMarkets.marketsSelectedPlural")
+												: t("adGenerator.targetMarkets.marketsSelected")}{" "}
+											{t("adGenerator.targetMarkets.selected")}
 										</p>
 									)}
 								</div>
 
 								<div className="space-y-3">
-									<Label className="text-white/90">{t("adGenerator.targetMarkets.platforms")}</Label>
-									<div className="flex flex-wrap gap-2 p-4 bg-white/5 rounded-lg border border-white/10">
+									<Label className="text-white/90">
+										{t("adGenerator.targetMarkets.platforms")}
+									</Label>
+									<div className="flex flex-wrap gap-2 rounded-lg border border-white/10 bg-white/5 p-4">
 										{supportedPlatforms.map((platform) => (
 											<Badge
 												key={platform.id}
@@ -491,8 +536,8 @@ export function AdGeneratorStepper({
 												className={cn(
 													"cursor-pointer transition-all duration-300",
 													formData.selectedPlatforms.includes(platform.id)
-														? "bg-primary border-0 text-white animate-in fade-in duration-200"
-														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20 hover:border-white/30",
+														? "fade-in animate-in border-0 bg-primary text-white duration-200"
+														: "border-white/20 bg-white/10 text-white/70 hover:border-white/30 hover:bg-white/20",
 												)}
 												onClick={() => handlePlatformToggle(platform.id)}
 											>
@@ -507,7 +552,11 @@ export function AdGeneratorStepper({
 									)}
 									{formData.selectedPlatforms.length > 0 && (
 										<p className="text-sm text-white/60">
-											{formData.selectedPlatforms.length} {formData.selectedPlatforms.length > 1 ? t("adGenerator.targetMarkets.platformsSelectedPlural") : t("adGenerator.targetMarkets.platformsSelected")} {t("adGenerator.targetMarkets.selected")}
+											{formData.selectedPlatforms.length}{" "}
+											{formData.selectedPlatforms.length > 1
+												? t("adGenerator.targetMarkets.platformsSelectedPlural")
+												: t("adGenerator.targetMarkets.platformsSelected")}{" "}
+											{t("adGenerator.targetMarkets.selected")}
 										</p>
 									)}
 								</div>
@@ -523,9 +572,9 @@ export function AdGeneratorStepper({
 						variant="ghost"
 						onClick={handleBack}
 						disabled={currentStep === 1}
-						className="text-white/70 hover:text-white hover:bg-white/10 disabled:opacity-30 transition-all duration-200"
+						className="text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white disabled:opacity-30"
 					>
-						<ChevronLeft className="w-4 h-4 mr-2" />
+						<ChevronLeft className="mr-2 h-4 w-4" />
 						{t("adGenerator.navigation.back")}
 					</Button>
 
@@ -535,25 +584,25 @@ export function AdGeneratorStepper({
 								type="button"
 								onClick={handleNext}
 								disabled={!canProceedFromStep(currentStep)}
-								className="bg-primary hover:bg-primary/90 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+								className="bg-primary text-white transition-all duration-200 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								{t("adGenerator.navigation.continue")}
-								<ChevronRight className="w-4 h-4 ml-2" />
+								<ChevronRight className="ml-2 h-4 w-4" />
 							</Button>
 						) : (
 							<Button
 								type="submit"
 								disabled={!canProceedFromStep(3) || isLoading}
-								className="bg-primary hover:bg-primary/90 text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px] transition-all duration-200"
+								className="min-w-[180px] bg-primary text-white transition-all duration-200 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								{isLoading ? (
 									<>
-										<div className="w-4 h-4 mr-2 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+										<div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
 										{t("adGenerator.navigation.generating")}
 									</>
 								) : (
 									<>
-										<Sparkles className="w-4 h-4 mr-2" />
+										<Sparkles className="mr-2 h-4 w-4" />
 										{t("adGenerator.navigation.generateAds")}
 									</>
 								)}

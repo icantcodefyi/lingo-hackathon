@@ -90,4 +90,3 @@ const preloadLocales = async () => {
 preloadLocales().catch(console.error);
 
 export default i18n;
-

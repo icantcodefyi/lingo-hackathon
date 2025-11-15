@@ -1,11 +1,10 @@
-import * as React from "react";
 import useEmblaCarousel, {
 	type UseEmblaCarouselType,
 } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import * as React from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -116,16 +115,16 @@ function Carousel({
 				canScrollNext,
 			}}
 		>
-			<div
+			{/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: aria-roledescription is valid for semantic section elements */}
+			<section
 				onKeyDownCapture={handleKeyDown}
 				className={cn("relative", className)}
-				role="region"
 				aria-roledescription="carousel"
 				data-slot="carousel"
 				{...props}
 			>
 				{children}
-			</div>
+			</section>
 		</CarouselContext.Provider>
 	);
 }
@@ -155,6 +154,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 	const { orientation } = useCarousel();
 
 	return (
+		// biome-ignore lint/a11y/useSemanticElements: fieldset would break styling
 		<div
 			role="group"
 			aria-roledescription="slide"
@@ -185,8 +185,8 @@ function CarouselPrevious({
 			className={cn(
 				"absolute size-8 rounded-full",
 				orientation === "horizontal"
-					? "top-1/2 -left-12 -translate-y-1/2"
-					: "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+					? "-left-12 -translate-y-1/2 top-1/2"
+					: "-top-12 -translate-x-1/2 left-1/2 rotate-90",
 				className,
 			)}
 			disabled={!canScrollPrev}
@@ -215,8 +215,8 @@ function CarouselNext({
 			className={cn(
 				"absolute size-8 rounded-full",
 				orientation === "horizontal"
-					? "top-1/2 -right-12 -translate-y-1/2"
-					: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+					? "-right-12 -translate-y-1/2 top-1/2"
+					: "-bottom-12 -translate-x-1/2 left-1/2 rotate-90",
 				className,
 			)}
 			disabled={!canScrollNext}

@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 export default function PulsingCircle() {
 	return (
-		<div className="absolute bottom-8 right-8 z-30">
-			<div className="relative w-20 h-20 flex items-center justify-center">
+		<div className="absolute right-8 bottom-8 z-30">
+			<div className="relative flex h-20 w-20 items-center justify-center">
 				{/* Pulsing Border Circle */}
 				<PulsingBorder
 					colors={[
@@ -40,7 +40,7 @@ export default function PulsingCircle() {
 
 				{/* Rotating Text Around the Pulsing Border */}
 				<motion.svg
-					className="absolute inset-0 w-full h-full"
+					className="absolute inset-0 h-full w-full"
 					viewBox="0 0 100 100"
 					animate={{ rotate: 360 }}
 					transition={{
@@ -49,14 +49,17 @@ export default function PulsingCircle() {
 						ease: "linear",
 					}}
 					style={{ transform: "scale(1.6)" }}
+					role="img"
+					aria-label="Rotating decorative text"
 				>
+					<title>Rotating decorative text</title>
 					<defs>
 						<path
 							id="circle"
 							d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
 						/>
 					</defs>
-					<text className="text-sm fill-white/80 instrument">
+					<text className="instrument fill-white/80 text-sm">
 						<textPath href="#circle" startOffset="0%">
 							Lingo.dev Hackathon • Global Ads • AI Powered • Compliance Ready •
 						</textPath>

@@ -2,9 +2,9 @@
  * Validation utilities for ad generation and compliance
  */
 
-import type { PlatformConstraints } from "../types/ad-generation.types";
-import { isLocaleSupported } from "../config/region.config";
 import { isPlatformSupported } from "../config/platform.config";
+import { isLocaleSupported } from "../config/region.config";
+import type { PlatformConstraints } from "../types/ad-generation.types";
 
 /**
  * Validation result interface

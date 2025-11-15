@@ -1,118 +1,118 @@
 {
-  "common": {
-    "app": "App",
-    "signIn": "Entrar"
-  },
-  "hero": {
-    "poweredBy": "✨ Desenvolvido por Lingo.dev + IA",
-    "titleSuffix": "Anúncios",
-    "subtitle": "Publicidade global",
-    "description": "Crie, localize e valide legalmente anúncios para qualquer mercado em minutos. Transforme um anúncio em um pacote culturalmente adaptado, legalmente compatível e pronto para plataformas em todos os mercados.",
-    "aboutLingo": "Sobre a Lingo.dev",
-    "launchApp": "Iniciar app"
-  },
-  "header": {
-    "lingoDev": "Lingo.dev",
-    "github": "GitHub"
-  },
-  "rizzAds": {
-    "title": "Rizz Ads",
-    "subtitle": "Motor de geração e conformidade de anúncios globais",
-    "description": "Crie, localize e valide legalmente anúncios para qualquer mercado em minutos",
-    "generatedAds": "Seus anúncios gerados",
-    "reviewAds": "Revise seus anúncios localizados e verifique a conformidade",
-    "poweredBy": "Desenvolvido por",
-    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
-  },
-  "adGenerator": {
-    "steps": {
-      "productInfo": {
-        "title": "Informações do produto",
-        "description": "Conte-nos sobre seu produto"
-      },
-      "adCopy": {
-        "title": "Texto do anúncio",
-        "description": "Seu conteúdo base do anúncio"
-      },
-      "targetMarkets": {
-        "title": "Mercados-alvo",
-        "description": "Selecione regiões e plataformas"
-      }
-    },
-    "productInfo": {
-      "title": "Informações do produto",
-      "subtitle": "Ajude-nos a entender o que você está anunciando",
-      "productName": "Nome do produto *",
-      "productNamePlaceholder": "ex., AI Writer Pro",
-      "category": "Categoria *",
-      "categoryPlaceholder": "ex., Software de produtividade",
-      "industry": "Indústria *",
-      "industryPlaceholder": "ex., SaaS, finanças, saúde",
-      "features": "Principais recursos (opcional)",
-      "featurePlaceholder": "ex., geração de conteúdo com IA",
-      "addFeature": "Adicionar recurso",
-      "benefits": "Principais benefícios (opcional)",
-      "benefitPlaceholder": "ex., economize 10 horas por semana",
-      "addBenefit": "Adicionar benefício"
-    },
-    "adCopy": {
-      "title": "Texto base do anúncio",
-      "subtitle": "Insira seu texto original do anúncio em inglês. Nós o localizaremos para seus mercados-alvo.",
-      "label": "Texto do anúncio *",
-      "placeholder": "ex., aumente sua produtividade com nosso assistente de escrita com IA. Comece hoje e economize 10 horas por semana!",
-      "characters": "caracteres"
-    },
-    "targetMarkets": {
-      "title": "Mercados e plataformas-alvo",
-      "subtitle": "Escolha onde deseja veicular seus anúncios",
-      "markets": "Mercados-alvo *",
-      "selectAtLeastOneMarket": "Selecione pelo menos um mercado-alvo",
-      "marketsSelected": "mercado",
-      "marketsSelectedPlural": "mercados",
-      "selected": "selecionado",
-      "platforms": "Plataformas de anúncios *",
-      "selectAtLeastOnePlatform": "Selecione pelo menos uma plataforma",
-      "platformsSelected": "plataforma",
-      "platformsSelectedPlural": "plataformas"
-    },
-    "navigation": {
-      "back": "Voltar",
-      "continue": "Continuar",
-      "generating": "Gerando...",
-      "generateAds": "Gerar anúncios"
-    }
-  },
-  "adResults": {
-    "title": "Anúncios gerados",
-    "variationsCreated": "variações de anúncios localizadas criadas",
-    "exportAll": "Exportar tudo",
-    "baseTranslation": "Tradução base",
-    "culturalTone": "Tom cultural",
-    "culturalNotes": "Notas culturais",
-    "emojiTolerance": "Tolerância a emojis",
-    "cta": "CTA",
-    "platformVariations": "Variações específicas de plataforma",
-    "checkCompliance": "Verificar conformidade"
-  },
-  "compliance": {
-    "title": "Relatórios de conformidade",
-    "adsAnalyzed": "anúncio",
-    "adsAnalyzedPlural": "anúncios",
-    "analyzedFor": "analisado para conformidade",
-    "overallRisk": "Avaliação geral de risco",
-    "risk": "RISCO",
-    "originalAdCopy": "Texto original do anúncio",
-    "patternMatchedIssues": "Problemas identificados por padrão",
-    "patternMatchedDescription": "Problemas detectados por correspondência de padrões baseada em regras",
-    "matched": "Correspondido",
-    "authority": "Autoridade",
-    "aiDetectedIssues": "Problemas detectados por IA",
-    "aiDetectedDescription": "Problemas avançados de conformidade identificados por análise de IA",
-    "noIssuesDetected": "Nenhum problema adicional detectado",
-    "rule": "Regra",
-    "suggestedFix": "Correção sugerida",
-    "compliantVersion": "Versão em conformidade",
-    "compliantDescription": "Texto do anúncio corrigido automaticamente que resolve todos os problemas de conformidade",
-    "explanation": "Explicação das alterações"
-  }
+	"common": {
+		"app": "App",
+		"signIn": "Entrar"
+	},
+	"hero": {
+		"poweredBy": "✨ Desenvolvido por Lingo.dev + IA",
+		"titleSuffix": "Anúncios",
+		"subtitle": "Publicidade global",
+		"description": "Crie, localize e valide legalmente anúncios para qualquer mercado em minutos. Transforme um anúncio em um pacote culturalmente adaptado, legalmente compatível e pronto para plataformas em todos os mercados.",
+		"aboutLingo": "Sobre a Lingo.dev",
+		"launchApp": "Iniciar app"
+	},
+	"header": {
+		"lingoDev": "Lingo.dev",
+		"github": "GitHub"
+	},
+	"rizzAds": {
+		"title": "Rizz Ads",
+		"subtitle": "Motor de geração e conformidade de anúncios globais",
+		"description": "Crie, localize e valide legalmente anúncios para qualquer mercado em minutos",
+		"generatedAds": "Seus anúncios gerados",
+		"reviewAds": "Revise seus anúncios localizados e verifique a conformidade",
+		"poweredBy": "Desenvolvido por",
+		"poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
+	},
+	"adGenerator": {
+		"steps": {
+			"productInfo": {
+				"title": "Informações do produto",
+				"description": "Conte-nos sobre seu produto"
+			},
+			"adCopy": {
+				"title": "Texto do anúncio",
+				"description": "Seu conteúdo base do anúncio"
+			},
+			"targetMarkets": {
+				"title": "Mercados-alvo",
+				"description": "Selecione regiões e plataformas"
+			}
+		},
+		"productInfo": {
+			"title": "Informações do produto",
+			"subtitle": "Ajude-nos a entender o que você está anunciando",
+			"productName": "Nome do produto *",
+			"productNamePlaceholder": "ex., AI Writer Pro",
+			"category": "Categoria *",
+			"categoryPlaceholder": "ex., Software de produtividade",
+			"industry": "Indústria *",
+			"industryPlaceholder": "ex., SaaS, finanças, saúde",
+			"features": "Principais recursos (opcional)",
+			"featurePlaceholder": "ex., geração de conteúdo com IA",
+			"addFeature": "Adicionar recurso",
+			"benefits": "Principais benefícios (opcional)",
+			"benefitPlaceholder": "ex., economize 10 horas por semana",
+			"addBenefit": "Adicionar benefício"
+		},
+		"adCopy": {
+			"title": "Texto base do anúncio",
+			"subtitle": "Insira seu texto original do anúncio em inglês. Nós o localizaremos para seus mercados-alvo.",
+			"label": "Texto do anúncio *",
+			"placeholder": "ex., aumente sua produtividade com nosso assistente de escrita com IA. Comece hoje e economize 10 horas por semana!",
+			"characters": "caracteres"
+		},
+		"targetMarkets": {
+			"title": "Mercados e plataformas-alvo",
+			"subtitle": "Escolha onde deseja veicular seus anúncios",
+			"markets": "Mercados-alvo *",
+			"selectAtLeastOneMarket": "Selecione pelo menos um mercado-alvo",
+			"marketsSelected": "mercado",
+			"marketsSelectedPlural": "mercados",
+			"selected": "selecionado",
+			"platforms": "Plataformas de anúncios *",
+			"selectAtLeastOnePlatform": "Selecione pelo menos uma plataforma",
+			"platformsSelected": "plataforma",
+			"platformsSelectedPlural": "plataformas"
+		},
+		"navigation": {
+			"back": "Voltar",
+			"continue": "Continuar",
+			"generating": "Gerando...",
+			"generateAds": "Gerar anúncios"
+		}
+	},
+	"adResults": {
+		"title": "Anúncios gerados",
+		"variationsCreated": "variações de anúncios localizadas criadas",
+		"exportAll": "Exportar tudo",
+		"baseTranslation": "Tradução base",
+		"culturalTone": "Tom cultural",
+		"culturalNotes": "Notas culturais",
+		"emojiTolerance": "Tolerância a emojis",
+		"cta": "CTA",
+		"platformVariations": "Variações específicas de plataforma",
+		"checkCompliance": "Verificar conformidade"
+	},
+	"compliance": {
+		"title": "Relatórios de conformidade",
+		"adsAnalyzed": "anúncio",
+		"adsAnalyzedPlural": "anúncios",
+		"analyzedFor": "analisado para conformidade",
+		"overallRisk": "Avaliação geral de risco",
+		"risk": "RISCO",
+		"originalAdCopy": "Texto original do anúncio",
+		"patternMatchedIssues": "Problemas identificados por padrão",
+		"patternMatchedDescription": "Problemas detectados por correspondência de padrões baseada em regras",
+		"matched": "Correspondido",
+		"authority": "Autoridade",
+		"aiDetectedIssues": "Problemas detectados por IA",
+		"aiDetectedDescription": "Problemas avançados de conformidade identificados por análise de IA",
+		"noIssuesDetected": "Nenhum problema adicional detectado",
+		"rule": "Regra",
+		"suggestedFix": "Correção sugerida",
+		"compliantVersion": "Versão em conformidade",
+		"compliantDescription": "Texto do anúncio corrigido automaticamente que resolve todos os problemas de conformidade",
+		"explanation": "Explicação das alterações"
+	}
 }

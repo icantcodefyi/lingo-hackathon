@@ -1,4 +1,6 @@
+import { Loader2, Plus, X } from "lucide-react";
 import { useState } from "react";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
 	Card,
@@ -10,9 +12,6 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { Checkbox } from "./ui/checkbox";
-import { Badge } from "./ui/badge";
-import { Loader2, Plus, X } from "lucide-react";
 
 interface AdGeneratorFormProps {
 	onGenerate: (data: {
@@ -163,7 +162,7 @@ export function AdGeneratorForm({
 					<div className="space-y-2">
 						<Label>Features</Label>
 						{features.map((feature, index) => (
-							<div key={index} className="flex gap-2">
+							<div key={`feature-${index}-${feature}`} className="flex gap-2">
 								<Input
 									value={feature}
 									onChange={(e) => handleFeatureChange(index, e.target.value)}
@@ -187,7 +186,7 @@ export function AdGeneratorForm({
 							size="sm"
 							onClick={handleAddFeature}
 						>
-							<Plus className="h-4 w-4 mr-2" />
+							<Plus className="mr-2 h-4 w-4" />
 							Add Feature
 						</Button>
 					</div>
@@ -195,7 +194,7 @@ export function AdGeneratorForm({
 					<div className="space-y-2">
 						<Label>Benefits</Label>
 						{benefits.map((benefit, index) => (
-							<div key={index} className="flex gap-2">
+							<div key={`benefit-${index}-${benefit}`} className="flex gap-2">
 								<Input
 									value={benefit}
 									onChange={(e) => handleBenefitChange(index, e.target.value)}
@@ -219,7 +218,7 @@ export function AdGeneratorForm({
 							size="sm"
 							onClick={handleAddBenefit}
 						>
-							<Plus className="h-4 w-4 mr-2" />
+							<Plus className="mr-2 h-4 w-4" />
 							Add Benefit
 						</Button>
 					</div>
@@ -250,7 +249,7 @@ export function AdGeneratorForm({
 						))}
 					</div>
 					{selectedLocales.length === 0 && (
-						<p className="text-sm text-muted-foreground mt-2">
+						<p className="mt-2 text-muted-foreground text-sm">
 							Please select at least one target market
 						</p>
 					)}
@@ -282,7 +281,7 @@ export function AdGeneratorForm({
 						))}
 					</div>
 					{selectedPlatforms.length === 0 && (
-						<p className="text-sm text-muted-foreground mt-2">
+						<p className="mt-2 text-muted-foreground text-sm">
 							Please select at least one platform
 						</p>
 					)}

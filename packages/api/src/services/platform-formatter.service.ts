@@ -3,17 +3,17 @@
  * Converts translated copy into platform-specific ad formats
  */
 
-import { generateObject } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { generateObject } from "ai";
+import { PLATFORM_BEST_PRACTICES } from "../config/platform.config";
 import type {
-	PlatformId,
+	LocaleCode,
 	PlatformAdFormat,
 	PlatformConfig,
+	PlatformId,
 	RegionConfig,
-	LocaleCode,
 } from "../types/ad-generation.types";
 import { platformAdSchema } from "../types/ad-generation.types";
-import { PLATFORM_BEST_PRACTICES } from "../config/platform.config";
 import {
 	handleGenerationError,
 	retryWithBackoff,
@@ -250,7 +250,7 @@ export function optimizeForLength(text: string, maxLength: number) {
 	// Try to fit complete sentences
 	let optimized = "";
 	for (const sentence of sentences) {
-		const withSentence = optimized + sentence.trim() + ".";
+		const withSentence = `${optimized + sentence.trim()}.`;
 		if (withSentence.length <= maxLength) {
 			optimized = withSentence;
 		} else {
@@ -260,7 +260,7 @@ export function optimizeForLength(text: string, maxLength: number) {
 
 	// If no complete sentences fit, truncate with ellipsis
 	if (!optimized) {
-		optimized = text.substring(0, maxLength - 3).trim() + "...";
+		optimized = `${text.substring(0, maxLength - 3).trim()}...`;
 	}
 
 	return {

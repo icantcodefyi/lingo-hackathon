@@ -3,13 +3,11 @@
  * Deep semantic analysis of ad copy for compliance
  */
 
-import { generateObject } from "ai";
 import { openai } from "@ai-sdk/openai";
-import type {
-	PatternMatchIssue,
-} from "../types/compliance.types";
-import { complianceReportSchema } from "../types/compliance.types";
+import { generateObject } from "ai";
 import { getCountryRules } from "../config/compliance-rules.config";
+import type { PatternMatchIssue } from "../types/compliance.types";
+import { complianceReportSchema } from "../types/compliance.types";
 import {
 	handleGenerationError,
 	retryWithBackoff,
@@ -170,8 +168,8 @@ ${getPlatformConsiderations(platform)}
 ## Strictness Level
 ${
 	strictMode
-		? `**STRICT MODE ACTIVE**: Apply zero-tolerance approach. Flag even borderline issues. Prioritize legal safety over marketing aggressiveness.`
-		: `**STANDARD MODE**: Apply reasonable business judgment. Balance compliance with marketing effectiveness. Focus on clear violations.`
+		? "**STRICT MODE ACTIVE**: Apply zero-tolerance approach. Flag even borderline issues. Prioritize legal safety over marketing aggressiveness."
+		: "**STANDARD MODE**: Apply reasonable business judgment. Balance compliance with marketing effectiveness. Focus on clear violations."
 }
 
 Be thorough, practical, and actionable in your analysis.`;
@@ -267,7 +265,7 @@ export async function quickComplianceCheck(params: {
 	locale: string;
 	platform: string;
 }) {
-	const { adCopy, locale, platform } = params;
+	const { adCopy, _locale, _platform } = params;
 
 	// Simple heuristic checks
 	const concerns: string[] = [];

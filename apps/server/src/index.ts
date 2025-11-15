@@ -1,14 +1,14 @@
 import "dotenv/config";
-import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
+import { createContext } from "@my-better-t-app/api/context";
+import { appRouter } from "@my-better-t-app/api/routers/index";
+import { auth } from "@my-better-t-app/auth";
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { OpenAPIReferencePlugin } from "@orpc/openapi/plugins";
-import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
-import { RPCHandler } from "@orpc/server/fetch";
 import { onError } from "@orpc/server";
-import { appRouter } from "@my-better-t-app/api/routers/index";
-import { createContext } from "@my-better-t-app/api/context";
-import { auth } from "@my-better-t-app/auth";
+import { RPCHandler } from "@orpc/server/fetch";
+import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
+import { Elysia } from "elysia";
 
 const rpcHandler = new RPCHandler(appRouter, {
 	interceptors: [

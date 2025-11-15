@@ -4,9 +4,9 @@
  */
 
 import type {
-	PlatformRules,
 	CountryRules,
 	IndustryRules,
+	PlatformRules,
 } from "../types/compliance.types";
 
 /**

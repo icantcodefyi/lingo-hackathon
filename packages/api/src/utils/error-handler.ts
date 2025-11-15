@@ -174,7 +174,7 @@ export async function retryWithBackoff<T>(
 				throw error;
 			}
 
-			const delay = initialDelay * Math.pow(2, attempt);
+			const delay = initialDelay * 2 ** attempt;
 			console.log(
 				`Retry attempt ${attempt + 1}/${maxRetries} after ${delay}ms`,
 			);

@@ -4,13 +4,16 @@
  */
 
 import { publicProcedure } from "../index";
-import { adGenerationInputSchema, type AdGenerationRequest } from "../types/ad-generation.types";
 import {
+	estimateGeneration,
 	generateAds,
 	getSupportedLocales,
 	getSupportedPlatforms,
-	estimateGeneration,
 } from "../services/ad-generation.service";
+import {
+	type AdGenerationRequest,
+	adGenerationInputSchema,
+} from "../types/ad-generation.types";
 import { logError } from "../utils/error-handler";
 
 /**

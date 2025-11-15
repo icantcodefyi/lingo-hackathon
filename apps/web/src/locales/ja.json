@@ -1,118 +1,118 @@
 {
-  "common": {
-    "app": "アプリ",
-    "signIn": "サインイン"
-  },
-  "hero": {
-    "poweredBy": "✨ Lingo.dev + AIを搭載",
-    "titleSuffix": "広告",
-    "subtitle": "グローバル広告",
-    "description": "数分で任意の市場向けの広告を作成、ローカライズ、法的に検証できます。1つの広告を、文化的に適応し、法的に準拠し、プラットフォーム対応のあらゆる市場向けパッケージに変換します。",
-    "aboutLingo": "Lingo.devについて",
-    "launchApp": "アプリを起動"
-  },
-  "header": {
-    "lingoDev": "Lingo.dev",
-    "github": "GitHub"
-  },
-  "rizzAds": {
-    "title": "Rizz Ads",
-    "subtitle": "グローバル広告生成 + コンプライアンスエンジン",
-    "description": "数分で任意の市場向けの広告を作成、ローカライズ、法的に検証",
-    "generatedAds": "生成された広告",
-    "reviewAds": "ローカライズされた広告を確認しコンプライアンスをチェック",
-    "poweredBy": "提供：",
-    "poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
-  },
-  "adGenerator": {
-    "steps": {
-      "productInfo": {
-        "title": "製品情報",
-        "description": "あなたの製品について教えてください"
-      },
-      "adCopy": {
-        "title": "広告コピー",
-        "description": "基本となる広告コンテンツ"
-      },
-      "targetMarkets": {
-        "title": "ターゲット市場",
-        "description": "地域とプラットフォームを選択"
-      }
-    },
-    "productInfo": {
-      "title": "製品情報",
-      "subtitle": "広告対象を理解するのにご協力ください",
-      "productName": "製品名 *",
-      "productNamePlaceholder": "例：AI Writer Pro",
-      "category": "カテゴリー *",
-      "categoryPlaceholder": "例：生産性ソフトウェア",
-      "industry": "業界 *",
-      "industryPlaceholder": "例：SaaS、金融、ヘルスケア",
-      "features": "主な機能（任意）",
-      "featurePlaceholder": "例：AI駆動のコンテンツ生成",
-      "addFeature": "機能を追加",
-      "benefits": "主なメリット（任意）",
-      "benefitPlaceholder": "例：週に10時間節約できます",
-      "addBenefit": "メリットを追加"
-    },
-    "adCopy": {
-      "title": "基本広告コピー",
-      "subtitle": "オリジナルの広告コピーを英語で入力してください。ターゲット市場に合わせてローカライズします。",
-      "label": "広告コピー *",
-      "placeholder": "例：AIを活用したライティングアシスタントで生産性を向上させましょう。今すぐ始めて、週に10時間節約しましょう！",
-      "characters": "文字"
-    },
-    "targetMarkets": {
-      "title": "ターゲット市場とプラットフォーム",
-      "subtitle": "広告を掲載したい場所を選択してください",
-      "markets": "ターゲット市場 *",
-      "selectAtLeastOneMarket": "少なくとも1つのターゲット市場を選択してください",
-      "marketsSelected": "市場",
-      "marketsSelectedPlural": "市場",
-      "selected": "選択済み",
-      "platforms": "広告プラットフォーム *",
-      "selectAtLeastOnePlatform": "少なくとも1つのプラットフォームを選択してください",
-      "platformsSelected": "プラットフォーム",
-      "platformsSelectedPlural": "プラットフォーム"
-    },
-    "navigation": {
-      "back": "戻る",
-      "continue": "続ける",
-      "generating": "生成中...",
-      "generateAds": "広告を生成"
-    }
-  },
-  "adResults": {
-    "title": "生成された広告",
-    "variationsCreated": "ローカライズされた広告バリエーションが作成されました",
-    "exportAll": "すべてをエクスポート",
-    "baseTranslation": "基本翻訳",
-    "culturalTone": "文化的トーン",
-    "culturalNotes": "文化的注釈",
-    "emojiTolerance": "絵文字の許容度",
-    "cta": "CTA",
-    "platformVariations": "プラットフォーム固有のバリエーション",
-    "checkCompliance": "コンプライアンスチェック"
-  },
-  "compliance": {
-    "title": "コンプライアンスレポート",
-    "adsAnalyzed": "広告",
-    "adsAnalyzedPlural": "広告",
-    "analyzedFor": "コンプライアンス分析済み",
-    "overallRisk": "総合リスク評価",
-    "risk": "リスク",
-    "originalAdCopy": "オリジナル広告コピー",
-    "patternMatchedIssues": "パターンマッチング検出の問題",
-    "patternMatchedDescription": "ルールベースのパターンマッチングによって検出された問題",
-    "matched": "一致",
-    "authority": "権限",
-    "aiDetectedIssues": "AI検出の問題",
-    "aiDetectedDescription": "AI分析によって特定された高度なコンプライアンス問題",
-    "noIssuesDetected": "追加の問題は検出されませんでした",
-    "rule": "ルール",
-    "suggestedFix": "推奨される修正",
-    "compliantVersion": "コンプライアンス準拠バージョン",
-    "compliantDescription": "すべてのコンプライアンス問題に対処する自動修正された広告コピー",
-    "explanation": "変更の説明"
-  }
+	"common": {
+		"app": "アプリ",
+		"signIn": "サインイン"
+	},
+	"hero": {
+		"poweredBy": "✨ Lingo.dev + AIを搭載",
+		"titleSuffix": "広告",
+		"subtitle": "グローバル広告",
+		"description": "数分で任意の市場向けの広告を作成、ローカライズ、法的に検証できます。1つの広告を、文化的に適応し、法的に準拠し、プラットフォーム対応のあらゆる市場向けパッケージに変換します。",
+		"aboutLingo": "Lingo.devについて",
+		"launchApp": "アプリを起動"
+	},
+	"header": {
+		"lingoDev": "Lingo.dev",
+		"github": "GitHub"
+	},
+	"rizzAds": {
+		"title": "Rizz Ads",
+		"subtitle": "グローバル広告生成 + コンプライアンスエンジン",
+		"description": "数分で任意の市場向けの広告を作成、ローカライズ、法的に検証",
+		"generatedAds": "生成された広告",
+		"reviewAds": "ローカライズされた広告を確認しコンプライアンスをチェック",
+		"poweredBy": "提供：",
+		"poweredByTech": "Lingo.dev + OpenAI GPT-4 + Cultural AI"
+	},
+	"adGenerator": {
+		"steps": {
+			"productInfo": {
+				"title": "製品情報",
+				"description": "あなたの製品について教えてください"
+			},
+			"adCopy": {
+				"title": "広告コピー",
+				"description": "基本となる広告コンテンツ"
+			},
+			"targetMarkets": {
+				"title": "ターゲット市場",
+				"description": "地域とプラットフォームを選択"
+			}
+		},
+		"productInfo": {
+			"title": "製品情報",
+			"subtitle": "広告対象を理解するのにご協力ください",
+			"productName": "製品名 *",
+			"productNamePlaceholder": "例：AI Writer Pro",
+			"category": "カテゴリー *",
+			"categoryPlaceholder": "例：生産性ソフトウェア",
+			"industry": "業界 *",
+			"industryPlaceholder": "例：SaaS、金融、ヘルスケア",
+			"features": "主な機能（任意）",
+			"featurePlaceholder": "例：AI駆動のコンテンツ生成",
+			"addFeature": "機能を追加",
+			"benefits": "主なメリット（任意）",
+			"benefitPlaceholder": "例：週に10時間節約できます",
+			"addBenefit": "メリットを追加"
+		},
+		"adCopy": {
+			"title": "基本広告コピー",
+			"subtitle": "オリジナルの広告コピーを英語で入力してください。ターゲット市場に合わせてローカライズします。",
+			"label": "広告コピー *",
+			"placeholder": "例：AIを活用したライティングアシスタントで生産性を向上させましょう。今すぐ始めて、週に10時間節約しましょう！",
+			"characters": "文字"
+		},
+		"targetMarkets": {
+			"title": "ターゲット市場とプラットフォーム",
+			"subtitle": "広告を掲載したい場所を選択してください",
+			"markets": "ターゲット市場 *",
+			"selectAtLeastOneMarket": "少なくとも1つのターゲット市場を選択してください",
+			"marketsSelected": "市場",
+			"marketsSelectedPlural": "市場",
+			"selected": "選択済み",
+			"platforms": "広告プラットフォーム *",
+			"selectAtLeastOnePlatform": "少なくとも1つのプラットフォームを選択してください",
+			"platformsSelected": "プラットフォーム",
+			"platformsSelectedPlural": "プラットフォーム"
+		},
+		"navigation": {
+			"back": "戻る",
+			"continue": "続ける",
+			"generating": "生成中...",
+			"generateAds": "広告を生成"
+		}
+	},
+	"adResults": {
+		"title": "生成された広告",
+		"variationsCreated": "ローカライズされた広告バリエーションが作成されました",
+		"exportAll": "すべてをエクスポート",
+		"baseTranslation": "基本翻訳",
+		"culturalTone": "文化的トーン",
+		"culturalNotes": "文化的注釈",
+		"emojiTolerance": "絵文字の許容度",
+		"cta": "CTA",
+		"platformVariations": "プラットフォーム固有のバリエーション",
+		"checkCompliance": "コンプライアンスチェック"
+	},
+	"compliance": {
+		"title": "コンプライアンスレポート",
+		"adsAnalyzed": "広告",
+		"adsAnalyzedPlural": "広告",
+		"analyzedFor": "コンプライアンス分析済み",
+		"overallRisk": "総合リスク評価",
+		"risk": "リスク",
+		"originalAdCopy": "オリジナル広告コピー",
+		"patternMatchedIssues": "パターンマッチング検出の問題",
+		"patternMatchedDescription": "ルールベースのパターンマッチングによって検出された問題",
+		"matched": "一致",
+		"authority": "権限",
+		"aiDetectedIssues": "AI検出の問題",
+		"aiDetectedDescription": "AI分析によって特定された高度なコンプライアンス問題",
+		"noIssuesDetected": "追加の問題は検出されませんでした",
+		"rule": "ルール",
+		"suggestedFix": "推奨される修正",
+		"compliantVersion": "コンプライアンス準拠バージョン",
+		"compliantDescription": "すべてのコンプライアンス問題に対処する自動修正された広告コピー",
+		"explanation": "変更の説明"
+	}
 }

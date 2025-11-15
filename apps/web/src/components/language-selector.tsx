@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
 	Select,
 	SelectContent,
@@ -6,7 +7,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import i18n, { languageNames, loadLocale } from "@/lib/i18n";
-import { useEffect, useState } from "react";
 
 const supportedLocales = ["en", "es", "fr", "de", "ja", "pt", "zh-CN", "ar"];
 
@@ -63,7 +63,7 @@ export default function LanguageSelector() {
 		>
 			<SelectTrigger
 				size="sm"
-				className="w-[140px] bg-white/10 border-white/20 text-white hover:bg-white/20 transition-colors"
+				className="w-[140px] border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20"
 			>
 				<SelectValue placeholder="Language">
 					{languageNames[currentLanguage] || currentLanguage}
@@ -79,4 +79,3 @@ export default function LanguageSelector() {
 		</Select>
 	);
 }
-

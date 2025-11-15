@@ -3,18 +3,18 @@
  * API endpoints for advertising compliance checking
  */
 
+import { z } from "zod";
 import { publicProcedure } from "../index";
+import {
+	checkCompliance,
+	compareCompliance,
+	getComplianceRules,
+} from "../services/compliance.service";
 import {
 	complianceInputSchema,
 	complianceRulesInputSchema,
 } from "../types/compliance.types";
-import {
-	checkCompliance,
-	getComplianceRules,
-	compareCompliance,
-} from "../services/compliance.service";
 import { logError } from "../utils/error-handler";
-import { z } from "zod";
 
 /**
  * Compliance Router

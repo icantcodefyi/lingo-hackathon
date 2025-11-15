@@ -1,9 +1,8 @@
 "use client";
 
-import type React from "react";
-
-import { useEffect, useRef, useState } from "react";
 import { MeshGradient } from "@paper-design/shaders-react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ShaderBackgroundProps {
 	children: React.ReactNode;
@@ -11,7 +10,7 @@ interface ShaderBackgroundProps {
 
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [isActive, setIsActive] = useState(false);
+	const [_isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
 		const handleMouseEnter = () => setIsActive(true);
@@ -34,21 +33,21 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 	return (
 		<>
 			{/* Background Shaders - Fixed position for smooth scrolling */}
-			<div className="fixed inset-0 w-screen h-screen z-0 pointer-events-none">
+			<div className="pointer-events-none fixed inset-0 z-0 h-screen w-screen">
 				<MeshGradient
-					className="absolute inset-0 w-full h-full"
+					className="absolute inset-0 h-full w-full"
 					colors={["#0a0a0f", "#6132a3", "#1e1b4b", "#2d1b69", "#0f0a1e"]}
 					speed={0.3}
 				/>
 				<MeshGradient
-					className="absolute inset-0 w-full h-full opacity-50"
+					className="absolute inset-0 h-full w-full opacity-50"
 					colors={["#1e1b4b", "#6132a3", "#4c1d95", "#2d1b69"]}
 					speed={0.2}
 				/>
 			</div>
 
 			{/* SVG Filters */}
-			<svg className="fixed top-0 left-0 w-0 h-0">
+			<svg className="fixed top-0 left-0 h-0 w-0" aria-hidden="true">
 				<defs>
 					<filter
 						id="glass-effect"
@@ -87,10 +86,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 				</defs>
 			</svg>
 
-			<div
-				ref={containerRef}
-				className="min-h-screen relative z-10"
-			>
+			<div ref={containerRef} className="relative z-10 min-h-screen">
 				{children}
 			</div>
 		</>

@@ -1,16 +1,17 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import type { AdGenerationResponse } from "@my-better-t-app/api/types/ad-generation.types";
+import type { ComplianceCheckResult } from "@my-better-t-app/api/types/compliance.types";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { orpc, client } from "@/utils/orpc";
-import { authClient } from "@/lib/auth-client";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { AdGeneratorStepper } from "@/components/ad-generator-stepper";
 import { AdResultsDisplay } from "@/components/ad-results-display";
 import { ComplianceReportDisplay } from "@/components/compliance-report";
-import { toast } from "sonner";
-import ShaderBackground from "@/components/shader-background";
 import Header from "@/components/header";
-import { Sparkles } from "lucide-react";
+import ShaderBackground from "@/components/shader-background";
+import { authClient } from "@/lib/auth-client";
 import i18n from "@/lib/i18n";
+import { client, orpc } from "@/utils/orpc";
 
 export const Route = createFileRoute("/rizz-ads")({
 	component: RouteComponent,
@@ -26,9 +27,11 @@ export const Route = createFileRoute("/rizz-ads")({
 });
 
 function RouteComponent() {
-	const [adResults, setAdResults] = useState<any>(null);
-	const [complianceReports, setComplianceReports] = useState<any[]>([]);
-	const [language, setLanguage] = useState(i18n.language);
+	const [adResults, setAdResults] = useState<AdGenerationResponse | null>(null);
+	const [complianceReports, setComplianceReports] = useState<
+		ComplianceCheckResult[]
+	>([]);
+	const [_language, setLanguage] = useState(i18n.language);
 
 	useEffect(() => {
 		const handleLanguageChanged = (lng: string) => {
@@ -52,7 +55,7 @@ function RouteComponent() {
 	);
 
 	const generateAdsMutation = useMutation({
-		mutationFn: async (data: any) => {
+		mutationFn: async (data: Parameters<typeof client.generateAds>[0]) => {
 			return client.generateAds(data);
 		},
 		onSuccess: (data) => {
@@ -86,7 +89,7 @@ function RouteComponent() {
 		},
 	});
 
-	const handleGenerate = (data: any) => {
+	const handleGenerate = (data: Parameters<typeof client.generateAds>[0]) => {
 		generateAdsMutation.mutate(data);
 	};
 
@@ -132,19 +135,20 @@ function RouteComponent() {
 		<ShaderBackground>
 			<Header />
 
-			<div className="relative z-10 container mx-auto px-6 py-12 max-w-7xl">
+			<div className="container relative z-10 mx-auto max-w-7xl px-6 py-12">
 				{/* Hero Section */}
 				{!adResults && (
-					<div className="mb-16 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-						<div className="flex items-center justify-center gap-3 mb-4">
-							<h1 className="text-6xl font-bold text-white">
-								<span className="italic instrument">Rizz</span> {t("rizzAds.title")}
+					<div className="fade-in slide-in-from-bottom-4 mb-16 animate-in space-y-4 text-center duration-700">
+						<div className="mb-4 flex items-center justify-center gap-3">
+							<h1 className="font-bold text-6xl text-white">
+								<span className="instrument italic">Rizz</span>{" "}
+								{t("rizzAds.title")}
 							</h1>
 						</div>
-						<p className="text-xl text-white/80 max-w-3xl mx-auto">
+						<p className="mx-auto max-w-3xl text-white/80 text-xl">
 							{t("rizzAds.subtitle")}
 						</p>
-						<p className="text-base text-white/60 max-w-2xl mx-auto">
+						<p className="mx-auto max-w-2xl text-base text-white/60">
 							{t("rizzAds.description")}
 						</p>
 					</div>
@@ -153,7 +157,7 @@ function RouteComponent() {
 				{/* Main Content */}
 				<div className="space-y-16">
 					{!adResults && (
-						<section className="animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
+						<section className="fade-in slide-in-from-bottom-6 animate-in delay-150 duration-700">
 							<AdGeneratorStepper
 								onGenerate={handleGenerate}
 								isLoading={generateAdsMutation.isPending}
@@ -165,15 +169,13 @@ function RouteComponent() {
 
 					{adResults && (
 						<>
-							<div className="text-center mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-								<h2 className="text-3xl font-bold text-white mb-2">
+							<div className="fade-in slide-in-from-top-4 mb-8 animate-in text-center duration-500">
+								<h2 className="mb-2 font-bold text-3xl text-white">
 									{t("rizzAds.generatedAds")}
 								</h2>
-								<p className="text-white/60">
-									{t("rizzAds.reviewAds")}
-								</p>
+								<p className="text-white/60">{t("rizzAds.reviewAds")}</p>
 							</div>
-							<section className="animate-in fade-in slide-in-from-bottom-6 duration-500 delay-100">
+							<section className="fade-in slide-in-from-bottom-6 animate-in delay-100 duration-500">
 								<AdResultsDisplay
 									results={adResults.results}
 									onRunCompliance={handleRunCompliance}
@@ -184,17 +186,19 @@ function RouteComponent() {
 					)}
 
 					{complianceReports.length > 0 && (
-						<section className="animate-in fade-in slide-in-from-bottom-6 duration-500 delay-200">
+						<section className="fade-in slide-in-from-bottom-6 animate-in delay-200 duration-500">
 							<ComplianceReportDisplay reports={complianceReports} />
 						</section>
 					)}
 				</div>
 
 				{/* Powered by Section */}
-				<div className="mt-20 pt-8 border-t border-white/10 text-center animate-in fade-in duration-700 delay-300">
+				<div className="fade-in mt-20 animate-in border-white/10 border-t pt-8 text-center delay-300 duration-700">
 					<p className="text-sm text-white/40">
 						{t("rizzAds.poweredBy")}{" "}
-						<span className="font-semibold text-white/60">{t("rizzAds.poweredByTech")}</span>
+						<span className="font-semibold text-white/60">
+							{t("rizzAds.poweredByTech")}
+						</span>
 					</p>
 				</div>
 			</div>

@@ -3,21 +3,22 @@
  * Coordinates translation and platform formatting
  */
 
+import { getPlatformConfig, PLATFORM_CONFIGS } from "../config/platform.config";
+import { getRegionConfig } from "../config/region.config";
 import type {
 	AdGenerationRequest,
-	LocalizedAdVariant,
 	LocaleCode,
+	LocalizedAdVariant,
+	PlatformAdFormat,
 } from "../types/ad-generation.types";
-import { getRegionConfig } from "../config/region.config";
-import { getPlatformConfig, PLATFORM_CONFIGS } from "../config/platform.config";
-import { translateAdCopy } from "./translation.service";
-import { formatAdForPlatform } from "./platform-formatter.service";
+import { handleValidationError, logError } from "../utils/error-handler";
 import {
 	validateLocales,
 	validatePlatforms,
 	validateProductDetails,
 } from "../utils/validation-utils";
-import { handleValidationError, logError } from "../utils/error-handler";
+import { formatAdForPlatform } from "./platform-formatter.service";
+import { translateAdCopy } from "./translation.service";
 
 /**
  * Generate localized ads for multiple platforms and locales
@@ -90,7 +91,7 @@ async function generateLocaleVariant(
 	});
 
 	// Step 2: Format for each target platform
-	const platformAds: Record<string, any> = {};
+	const platformAds: Record<string, PlatformAdFormat> = {};
 
 	for (const platformId of request.targetPlatforms) {
 		const platformConfig = getPlatformConfig(platformId);

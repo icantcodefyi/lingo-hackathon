@@ -3,19 +3,13 @@
  * Pattern-based validation for advertising compliance
  */
 
-import type {
-	Rule,
-	PatternRule,
-	KeywordRule,
-	PatternMatchIssue,
-	SeverityLevel,
-} from "../types/compliance.types";
 import {
-	getPlatformRules,
 	getCountryRules,
 	getIndustryRules,
+	getPlatformRules,
 	requiresStrictCompliance,
 } from "../config/compliance-rules.config";
+import type { PatternMatchIssue, Rule } from "../types/compliance.types";
 
 /**
  * Validate ad copy against all applicable rules
@@ -77,7 +71,7 @@ export function validateCompliance(params: {
 function checkRules(
 	adCopy: string,
 	rules: Rule[],
-	source: string,
+	_source: string,
 	metadata?: { authority?: string },
 ) {
 	const issues: PatternMatchIssue[] = [];

@@ -1,8 +1,8 @@
-import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import z from "zod";
+import { authClient } from "@/lib/auth-client";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -65,16 +65,24 @@ export default function SignUpForm({
 	};
 
 	return (
-		<div className="mx-auto w-full mt-10 max-w-md p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 animate-in fade-in slide-in-from-bottom-8 duration-700">
-			<h1 className="mb-6 text-center text-3xl font-bold text-white">Create Account</h1>
+		<div className="fade-in slide-in-from-bottom-8 mx-auto mt-10 w-full max-w-md animate-in rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl duration-700">
+			<h1 className="mb-6 text-center font-bold text-3xl text-white">
+				Create Account
+			</h1>
 
 			<Button
 				type="button"
 				variant="outline"
-				className="w-full mb-4 bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-200"
+				className="mb-4 w-full border-white/20 bg-white/10 text-white transition-all duration-200 hover:bg-white/20"
 				onClick={handleGoogleSignIn}
 			>
-				<svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+				<svg
+					className="mr-2 h-4 w-4"
+					viewBox="0 0 24 24"
+					role="img"
+					aria-label="Google logo"
+				>
+					<title>Google logo</title>
 					<path
 						fill="currentColor"
 						d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -97,7 +105,7 @@ export default function SignUpForm({
 
 			<div className="relative mb-4">
 				<div className="absolute inset-0 flex items-center">
-					<span className="w-full border-t border-white/20" />
+					<span className="w-full border-white/20 border-t" />
 				</div>
 				<div className="relative flex justify-center text-xs uppercase">
 					<span className="bg-transparent px-2 text-white/60">
@@ -118,17 +126,22 @@ export default function SignUpForm({
 					<form.Field name="name">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name} className="text-white/90">Name</Label>
+								<Label htmlFor={field.name} className="text-white/90">
+									Name
+								</Label>
 								<Input
 									id={field.name}
 									name={field.name}
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
-									className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-purple-500 transition-all duration-200"
+									className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-white/40 focus:border-purple-500 focus:bg-white/15"
 								/>
 								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-400 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
+									<p
+										key={error?.message}
+										className="fade-in slide-in-from-top-2 animate-in text-red-400 text-sm duration-200"
+									>
 										{error?.message}
 									</p>
 								))}
@@ -141,7 +154,9 @@ export default function SignUpForm({
 					<form.Field name="email">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name} className="text-white/90">Email</Label>
+								<Label htmlFor={field.name} className="text-white/90">
+									Email
+								</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -149,10 +164,13 @@ export default function SignUpForm({
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
-									className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-purple-500 transition-all duration-200"
+									className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-white/40 focus:border-purple-500 focus:bg-white/15"
 								/>
 								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-400 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
+									<p
+										key={error?.message}
+										className="fade-in slide-in-from-top-2 animate-in text-red-400 text-sm duration-200"
+									>
 										{error?.message}
 									</p>
 								))}
@@ -165,7 +183,9 @@ export default function SignUpForm({
 					<form.Field name="password">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name} className="text-white/90">Password</Label>
+								<Label htmlFor={field.name} className="text-white/90">
+									Password
+								</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -173,10 +193,13 @@ export default function SignUpForm({
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
-									className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-purple-500 transition-all duration-200"
+									className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-white/40 focus:border-purple-500 focus:bg-white/15"
 								/>
 								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-400 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
+									<p
+										key={error?.message}
+										className="fade-in slide-in-from-top-2 animate-in text-red-400 text-sm duration-200"
+									>
 										{error?.message}
 									</p>
 								))}
@@ -189,12 +212,12 @@ export default function SignUpForm({
 					{(state) => (
 						<Button
 							type="submit"
-							className="w-full bg-primary hover:bg-primary/90 text-white disabled:opacity-50 transition-all duration-200"
+							className="w-full bg-primary text-white transition-all duration-200 hover:bg-primary/90 disabled:opacity-50"
 							disabled={!state.canSubmit || state.isSubmitting}
 						>
 							{state.isSubmitting ? (
 								<>
-									<div className="w-4 h-4 mr-2 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+									<div className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
 									Creating Account...
 								</>
 							) : (
@@ -209,7 +232,7 @@ export default function SignUpForm({
 				<Button
 					variant="link"
 					onClick={onSwitchToSignIn}
-					className="text-white/70 hover:text-white transition-all duration-200"
+					className="text-white/70 transition-all duration-200 hover:text-white"
 				>
 					Already have an account? Sign In
 				</Button>

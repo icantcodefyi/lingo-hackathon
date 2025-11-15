@@ -5,10 +5,10 @@
 
 import { LingoDotDevEngine } from "lingo.dev/sdk";
 import type {
-	TranslationResult,
 	LocaleCode,
 	ProductDetails,
 	RegionConfig,
+	TranslationResult,
 } from "../types/ad-generation.types";
 import {
 	handleGenerationError,
@@ -24,9 +24,7 @@ const getLingoEngine = (() => {
 		if (!engine) {
 			const apiKey = process.env.LINGODOTDEV_API_KEY;
 			if (!apiKey) {
-				throw new Error(
-					"LINGODOTDEV_API_KEY environment variable is required",
-				);
+				throw new Error("LINGODOTDEV_API_KEY environment variable is required");
 			}
 			engine = new LingoDotDevEngine({
 				apiKey,
@@ -151,9 +149,7 @@ function buildCulturalNotes(params: {
 		notes.push(`Additional context: ${additionalContext}`);
 	}
 
-
-
-	return notes.join(". ") + ".";
+	return `${notes.join(". ")}.`;
 }
 
 /**

@@ -7,13 +7,13 @@ import type {
 	ComplianceCheckRequest,
 	ComplianceCheckResult,
 } from "../types/compliance.types";
+import { handleValidationError, logError } from "../utils/error-handler";
+import { analyzeComplianceWithAI } from "./compliance-ai.service";
 import {
-	validateCompliance,
 	calculateComplianceScore,
 	isSafeToPublish,
+	validateCompliance,
 } from "./compliance-validator.service";
-import { analyzeComplianceWithAI } from "./compliance-ai.service";
-import { handleValidationError, logError } from "../utils/error-handler";
 
 /**
  * Perform comprehensive compliance check
@@ -26,14 +26,13 @@ export async function checkCompliance(request: ComplianceCheckRequest) {
 
 	try {
 		// Step 1: Pattern-based validation
-		const { issues: patternMatchedIssues, overallSeverity } =
-			validateCompliance({
-				adCopy: request.adCopy,
-				locale: request.locale,
-				platform: request.platform,
-				industry: request.industry,
-				strictMode: request.strictMode,
-			});
+		const { issues: patternMatchedIssues } = validateCompliance({
+			adCopy: request.adCopy,
+			locale: request.locale,
+			platform: request.platform,
+			industry: request.industry,
+			strictMode: request.strictMode,
+		});
 
 		// Step 2: AI-powered deep analysis
 		const aiAnalysis = await analyzeComplianceWithAI({
@@ -46,8 +45,8 @@ export async function checkCompliance(request: ComplianceCheckRequest) {
 		});
 
 		// Step 3: Calculate metadata
-		const complianceScore = calculateComplianceScore(patternMatchedIssues);
-		const publishStatus = isSafeToPublish(
+		const _complianceScore = calculateComplianceScore(patternMatchedIssues);
+		const _publishStatus = isSafeToPublish(
 			patternMatchedIssues,
 			!request.strictMode,
 		);
@@ -128,7 +127,11 @@ export function getComplianceRules(params: {
 		INDUSTRY_RULES,
 	} = require("../config/compliance-rules.config");
 
-	const rules: any = {
+	const rules: {
+		platform: Record<string, unknown> | unknown[];
+		country: Record<string, unknown> | unknown[];
+		industry: Record<string, unknown> | unknown[];
+	} = {
 		platform: {},
 		country: {},
 		industry: {},
