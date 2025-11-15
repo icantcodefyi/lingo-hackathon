@@ -9,60 +9,67 @@ import { createTanstackQueryUtils } from "@orpc/tanstack-query";
 import type { AppRouterClient } from "@my-better-t-app/api/routers/index";
 import { createORPCClient } from "@orpc/client";
 import {
-	HeadContent,
-	Outlet,
-	createRootRouteWithContext,
+  HeadContent,
+  Outlet,
+  createRootRouteWithContext,
+  useRouterState,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import "../index.css";
 
 export interface RouterAppContext {
-	orpc: typeof orpc;
-	queryClient: QueryClient;
+  orpc: typeof orpc;
+  queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
-	component: RootComponent,
-	head: () => ({
-		meta: [
-			{
-				title: "my-better-t-app",
-			},
-			{
-				name: "description",
-				content: "my-better-t-app is a web application",
-			},
-		],
-		links: [
-			{
-				rel: "icon",
-				href: "/favicon.ico",
-			},
-		],
-	}),
+  component: RootComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "my-better-t-app",
+      },
+      {
+        name: "description",
+        content: "my-better-t-app is a web application",
+      },
+    ],
+    links: [
+      {
+        rel: "icon",
+        href: "/favicon.ico",
+      },
+    ],
+  }),
 });
 
 function RootComponent() {
-	const [client] = useState<AppRouterClient>(() => createORPCClient(link));
-	const [orpcUtils] = useState(() => createTanstackQueryUtils(client));
+  const [client] = useState<AppRouterClient>(() => createORPCClient(link));
+  const [orpcUtils] = useState(() => createTanstackQueryUtils(client));
+  const router = useRouterState();
+  const isLandingPage = router.location.pathname === "/";
 
-	return (
-		<>
-			<HeadContent />
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="dark"
-				disableTransitionOnChange
-				storageKey="vite-ui-theme"
-			>
-				<div className="grid grid-rows-[auto_1fr] h-svh">
-					<Header />
-					<Outlet />
-				</div>
-				<Toaster richColors />
-			</ThemeProvider>
-			<TanStackRouterDevtools position="bottom-left" />
-			<ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
-		</>
-	);
+  return (
+    <>
+      <HeadContent />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        disableTransitionOnChange
+        storageKey="vite-ui-theme"
+      >
+        {isLandingPage ? (
+          <Outlet />
+        ) : (
+          <div className="grid grid-rows-[auto_1fr] h-svh">
+            <Header />
+            <Outlet />
+          </div>
+        )}
+        <Toaster richColors />
+      </ThemeProvider>
+      <TanStackRouterDevtools position="bottom-left" />
+      <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
+    </>
+  );
 }

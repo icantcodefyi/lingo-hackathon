@@ -1,31 +1,44 @@
 import { Link } from "@tanstack/react-router";
-import { ModeToggle } from "./mode-toggle";
-import UserMenu from "./user-menu";
 
 export default function Header() {
-	const links = [
-		{ to: "/", label: "Home" },
-		{ to: "/dashboard", label: "Dashboard" },
-	] as const;
+  return (
+    <header className="relative z-20 flex items-center justify-between p-6">
+      {/* Logo */}
+      <Link to="/" className="flex items-center">
+        <span className="text-2xl font-medium text-white">
+          <span className="italic instrument">Rizz</span> Ads
+        </span>
+      </Link>
 
-	return (
-		<div>
-			<div className="flex flex-row items-center justify-between px-2 py-1">
-				<nav className="flex gap-4 text-lg">
-					{links.map(({ to, label }) => {
-						return (
-							<Link key={to} to={to}>
-								{label}
-							</Link>
-						);
-					})}
-				</nav>
-				<div className="flex items-center gap-2">
-					<ModeToggle />
-					<UserMenu />
-				</div>
-			</div>
-			<hr />
-		</div>
-	);
+      {/* Navigation */}
+      <nav className="flex items-center space-x-2">
+        <a
+          href="https://lingo.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
+        >
+          Lingo.dev
+        </a>
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/10 transition-all duration-200"
+        >
+          GitHub
+        </a>
+      </nav>
+
+      {/* Launch App Button */}
+      <div className="relative flex items-center group">
+        <Link
+          to="/rizz-ads"
+          className="px-6 py-2 rounded-full bg-white text-black font-normal text-xs transition-all duration-300 hover:bg-white/90 cursor-pointer h-8 flex items-center"
+        >
+          Launch App
+        </Link>
+      </div>
+    </header>
+  );
 }
