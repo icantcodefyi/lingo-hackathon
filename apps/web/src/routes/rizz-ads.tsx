@@ -122,7 +122,6 @@ function RouteComponent() {
 				{!adResults && (
 					<div className="mb-16 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
 						<div className="flex items-center justify-center gap-3 mb-4">
-							<Sparkles className="h-10 w-10 text-white animate-pulse" />
 							<h1 className="text-6xl font-bold text-white">
 								<span className="italic instrument">Rizz</span> Ads
 							</h1>
