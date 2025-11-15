@@ -28,12 +28,16 @@ function RouteComponent() {
 		<ShaderBackground>
 			<Header />
 			<div className="relative z-10 container mx-auto px-6 py-12">
-				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-					<h1 className="text-4xl font-bold text-white mb-4">Dashboard</h1>
-					<p className="text-white/80 text-lg mb-2">
+				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 animate-in fade-in slide-in-from-bottom-8 duration-700 hover:border-white/20 transition-all">
+					<h1 className="text-4xl font-bold text-white mb-4 animate-in fade-in slide-in-from-left-4 duration-500">
+						Dashboard
+					</h1>
+					<p className="text-white/80 text-lg mb-2 animate-in fade-in slide-in-from-left-4 duration-500 delay-100">
 						Welcome {session.data?.user.name}
 					</p>
-					<p className="text-white/60">API: {privateData.data?.message}</p>
+					<p className="text-white/60 animate-in fade-in slide-in-from-left-4 duration-500 delay-200">
+						API: {privateData.data?.message}
+					</p>
 				</div>
 			</div>
 		</ShaderBackground>

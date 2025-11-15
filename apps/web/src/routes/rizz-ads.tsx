@@ -122,7 +122,7 @@ function RouteComponent() {
 				{!adResults && (
 					<div className="mb-16 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
 						<div className="flex items-center justify-center gap-3 mb-4">
-							<Sparkles className="h-10 w-10 text-white" />
+							<Sparkles className="h-10 w-10 text-white animate-pulse" />
 							<h1 className="text-6xl font-bold text-white">
 								<span className="italic instrument">Rizz</span> Ads
 							</h1>
@@ -140,7 +140,7 @@ function RouteComponent() {
 				{/* Main Content */}
 				<div className="space-y-16">
 					{!adResults && (
-						<section>
+						<section className="animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
 							<AdGeneratorStepper
 								onGenerate={handleGenerate}
 								isLoading={generateAdsMutation.isPending}
@@ -152,7 +152,7 @@ function RouteComponent() {
 
 					{adResults && (
 						<>
-							<div className="text-center mb-8">
+							<div className="text-center mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
 								<h2 className="text-3xl font-bold text-white mb-2">
 									Your Generated Ads
 								</h2>
@@ -160,7 +160,7 @@ function RouteComponent() {
 									Review your localized ads and check compliance
 								</p>
 							</div>
-							<section>
+							<section className="animate-in fade-in slide-in-from-bottom-6 duration-500 delay-100">
 								<AdResultsDisplay
 									results={adResults.results}
 									onRunCompliance={handleRunCompliance}
@@ -171,14 +171,14 @@ function RouteComponent() {
 					)}
 
 					{complianceReports.length > 0 && (
-						<section>
+						<section className="animate-in fade-in slide-in-from-bottom-6 duration-500 delay-200">
 							<ComplianceReportDisplay reports={complianceReports} />
 						</section>
 					)}
 				</div>
 
 				{/* Powered by Section */}
-				<div className="mt-20 pt-8 border-t border-white/10 text-center">
+				<div className="mt-20 pt-8 border-t border-white/10 text-center animate-in fade-in duration-700 delay-300">
 					<p className="text-sm text-white/40">
 						Powered by{" "}
 						<span className="font-semibold text-white/60">Lingo.dev</span> +

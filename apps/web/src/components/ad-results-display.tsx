@@ -40,23 +40,31 @@ export function AdResultsDisplay({
 
 	return (
 		<div className="space-y-6">
-			<div className="flex items-center justify-between">
+			<div className="flex items-center justify-between animate-in fade-in slide-in-from-top-4 duration-500">
 				<div>
-					<h2 className="text-2xl font-bold">Generated Ads</h2>
-					<p className="text-muted-foreground">
+					<h2 className="text-2xl font-bold text-white">Generated Ads</h2>
+					<p className="text-white/60">
 						{results.length} localized ad variations created
 					</p>
 				</div>
-				<Button onClick={onExport}>
+				<Button 
+					onClick={onExport}
+					className="bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all duration-200"
+				>
 					<Download className="mr-2 h-4 w-4" />
 					Export All
 				</Button>
 			</div>
 
 			<Tabs defaultValue={results[0]?.locale} className="w-full">
-				<TabsList className="w-full justify-start overflow-x-auto">
-					{results.map((result) => (
-						<TabsTrigger key={result.locale} value={result.locale}>
+				<TabsList className="w-full justify-start overflow-x-auto bg-white/5 border border-white/10 p-1">
+					{results.map((result, index) => (
+						<TabsTrigger 
+							key={result.locale} 
+							value={result.locale}
+							className="data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300 text-white/70"
+							style={{ animationDelay: `${index * 50}ms` }}
+						>
 							<Globe className="mr-2 h-4 w-4" />
 							{result.locale}
 						</TabsTrigger>
@@ -67,33 +75,33 @@ export function AdResultsDisplay({
 					<TabsContent
 						key={result.locale}
 						value={result.locale}
-						className="space-y-4"
+						className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500"
 					>
-						<Card>
+						<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 							<CardHeader>
-								<CardTitle className="flex items-center justify-between">
+								<CardTitle className="flex items-center justify-between text-white">
 									<span>Base Translation - {result.locale}</span>
-									<Badge variant="outline">{result.config.formality}</Badge>
+									<Badge variant="outline" className="border-white/20 text-white/80">{result.config.formality}</Badge>
 								</CardTitle>
-								<CardDescription>
+								<CardDescription className="text-white/60">
 									Cultural tone: {result.config.tone}
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-4">
-								<div className="rounded-lg bg-muted p-4">
-									<p className="text-lg">{result.translatedCopy}</p>
+								<div className="rounded-lg bg-white/10 p-4 border border-white/10 transition-all duration-200 hover:bg-white/[0.12]">
+									<p className="text-lg text-white">{result.translatedCopy}</p>
 								</div>
-								<div className="rounded-lg border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950 p-4">
-									<p className="text-sm font-medium mb-1">Cultural Notes:</p>
-									<p className="text-sm">{result.culturalNotes}</p>
+								<div className="rounded-lg border-l-4 border-blue-500 bg-blue-500/10 p-4 backdrop-blur-sm">
+									<p className="text-sm font-medium mb-1 text-white">Cultural Notes:</p>
+									<p className="text-sm text-white/70">{result.culturalNotes}</p>
 								</div>
-								<div className="grid grid-cols-2 gap-2 text-sm">
+								<div className="grid grid-cols-2 gap-2 text-sm text-white/80">
 									<div>
-										<span className="font-medium">Emoji Tolerance:</span>{" "}
+										<span className="font-medium text-white">Emoji Tolerance:</span>{" "}
 										{result.config.emojiTolerance}
 									</div>
 									<div>
-										<span className="font-medium">CTA:</span>{" "}
+										<span className="font-medium text-white">CTA:</span>{" "}
 										{result.config.cta}
 									</div>
 								</div>
@@ -101,14 +109,18 @@ export function AdResultsDisplay({
 						</Card>
 
 						<div className="space-y-4">
-							<h3 className="text-xl font-semibold">
+							<h3 className="text-xl font-semibold text-white">
 								Platform-Specific Variations
 							</h3>
 							{Object.entries(result.platformAds).map(
-								([platform, ad]: [string, any]) => (
-									<Card key={platform}>
+								([platform, ad]: [string, any], index) => (
+									<Card 
+										key={platform}
+										className="bg-white/5 border-white/10 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-500 hover:border-white/20 transition-all"
+										style={{ animationDelay: `${index * 100}ms` }}
+									>
 										<CardHeader>
-											<CardTitle className="flex items-center justify-between">
+											<CardTitle className="flex items-center justify-between text-white">
 												<span className="capitalize">{platform}</span>
 												<Button
 													variant="outline"
@@ -119,6 +131,7 @@ export function AdResultsDisplay({
 															.join(" ");
 														onRunCompliance(result.locale, platform, adText);
 													}}
+													className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-200"
 												>
 													<AlertTriangle className="mr-2 h-4 w-4" />
 													Check Compliance
@@ -131,10 +144,10 @@ export function AdResultsDisplay({
 													if (!value) return null;
 													return (
 														<div key={key} className="space-y-1">
-															<Label className="text-xs font-medium uppercase text-muted-foreground">
+															<Label className="text-xs font-medium uppercase text-white/50">
 																{key.replace(/([A-Z])/g, " $1").trim()}
 															</Label>
-															<div className="rounded bg-muted p-2 text-sm">
+															<div className="rounded bg-white/10 p-2 text-sm text-white border border-white/10 transition-all duration-200 hover:bg-white/[0.12]">
 																{value as string}
 															</div>
 														</div>

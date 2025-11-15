@@ -87,18 +87,22 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 
 	return (
 		<div className="space-y-6">
-			<div>
-				<h2 className="text-2xl font-bold">Compliance Reports</h2>
-				<p className="text-muted-foreground">
+			<div className="animate-in fade-in slide-in-from-top-4 duration-500">
+				<h2 className="text-2xl font-bold text-white">Compliance Reports</h2>
+				<p className="text-white/60">
 					{reports.length} ad{reports.length !== 1 ? "s" : ""} analyzed for
 					compliance
 				</p>
 			</div>
 
 			<Tabs defaultValue="0" className="w-full">
-				<TabsList className="w-full justify-start overflow-x-auto">
+				<TabsList className="w-full justify-start overflow-x-auto bg-white/5 border border-white/10 p-1">
 					{reports.map((report, index) => (
-						<TabsTrigger key={index} value={index.toString()}>
+					<TabsTrigger 
+						key={index} 
+						value={index.toString()}
+						className="data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300 text-white/70"
+					>
 							{report.locale} - {report.platform}
 						</TabsTrigger>
 					))}
@@ -108,28 +112,29 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 					<TabsContent
 						key={index}
 						value={index.toString()}
-						className="space-y-4"
+						className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500"
 					>
-						<Card>
+						<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 							<CardHeader>
-								<CardTitle className="flex items-center justify-between">
+								<CardTitle className="flex items-center justify-between text-white">
 									<span>Overall Risk Assessment</span>
 									<Badge
 										variant={
 											getRiskBadgeVariant(report.aiAnalysis.overallRisk) as any
 										}
+										className="animate-in fade-in duration-300"
 									>
 										{report.aiAnalysis.overallRisk.toUpperCase()} RISK
 									</Badge>
 								</CardTitle>
-								<CardDescription>
+								<CardDescription className="text-white/60">
 									{report.locale} • {report.platform} • {report.industry}
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-4">
 								<div>
-									<p className="text-sm font-medium mb-2">Original Ad Copy:</p>
-									<div className="rounded-lg bg-muted p-3 text-sm">
+									<p className="text-sm font-medium mb-2 text-white">Original Ad Copy:</p>
+									<div className="rounded-lg bg-white/10 p-3 text-sm text-white border border-white/10">
 										{report.adCopy}
 									</div>
 								</div>
@@ -137,37 +142,41 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 						</Card>
 
 						{report.patternMatchedIssues.length > 0 && (
-							<Card>
+							<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 								<CardHeader>
-									<CardTitle>Pattern-Matched Issues</CardTitle>
-									<CardDescription>
+									<CardTitle className="text-white">Pattern-Matched Issues</CardTitle>
+									<CardDescription className="text-white/60">
 										Issues detected by rule-based pattern matching
 									</CardDescription>
 								</CardHeader>
 								<CardContent className="space-y-3">
 									{report.patternMatchedIssues.map((issue, idx) => (
-										<div key={idx} className="rounded-lg border p-3 space-y-2">
+										<div 
+											key={idx} 
+											className="rounded-lg border border-white/10 bg-white/5 p-3 space-y-2 animate-in fade-in slide-in-from-left-4 duration-300 hover:bg-white/[0.07] transition-all"
+											style={{ animationDelay: `${idx * 50}ms` }}
+										>
 											<div className="flex items-start gap-2">
 												{getSeverityIcon(issue.severity)}
 												<div className="flex-1">
-													<p className="font-medium">{issue.rule}</p>
+													<p className="font-medium text-white">{issue.rule}</p>
 													{issue.match && (
-														<p className="text-sm text-muted-foreground">
+														<p className="text-sm text-white/60">
 															Matched: "{issue.match}"
 														</p>
 													)}
 													{issue.authority && (
-														<p className="text-xs text-muted-foreground">
+														<p className="text-xs text-white/50">
 															Authority: {issue.authority}
 														</p>
 													)}
 													{issue.fix && (
-														<p className="text-sm mt-1 text-blue-600 dark:text-blue-400">
+														<p className="text-sm mt-1 text-blue-400">
 															💡 {issue.fix}
 														</p>
 													)}
 												</div>
-												<Badge variant="outline" className="text-xs">
+												<Badge variant="outline" className="text-xs border-white/20 text-white/80">
 													{issue.severity}
 												</Badge>
 											</div>
@@ -177,34 +186,38 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 							</Card>
 						)}
 
-						<Card>
+						<Card className="bg-white/5 border-white/10 backdrop-blur-xl">
 							<CardHeader>
-								<CardTitle>AI-Detected Issues</CardTitle>
-								<CardDescription>
+								<CardTitle className="text-white">AI-Detected Issues</CardTitle>
+								<CardDescription className="text-white/60">
 									Advanced compliance issues identified by AI analysis
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-3">
 								{report.aiAnalysis.issues.length === 0 ? (
-									<div className="flex items-center gap-2 text-green-600 dark:text-green-400">
+									<div className="flex items-center gap-2 text-green-400 animate-in fade-in duration-300">
 										<CheckCircle2 className="h-5 w-5" />
 										<span>No additional issues detected</span>
 									</div>
 								) : (
 									report.aiAnalysis.issues.map((issue, idx) => (
-										<div key={idx} className="rounded-lg border p-3 space-y-2">
+										<div 
+											key={idx} 
+											className="rounded-lg border border-white/10 bg-white/5 p-3 space-y-2 animate-in fade-in slide-in-from-left-4 duration-300 hover:bg-white/[0.07] transition-all"
+											style={{ animationDelay: `${idx * 50}ms` }}
+										>
 											<div className="flex items-start gap-2">
 												{getSeverityIcon(issue.severity)}
 												<div className="flex-1">
-													<p className="font-medium">{issue.issue}</p>
-													<p className="text-sm text-muted-foreground">
+													<p className="font-medium text-white">{issue.issue}</p>
+													<p className="text-sm text-white/60">
 														Rule: {issue.rule}
 													</p>
-													<p className="text-sm mt-1 text-blue-600 dark:text-blue-400">
+													<p className="text-sm mt-1 text-blue-400">
 														💡 Suggested Fix: {issue.suggestedFix}
 													</p>
 												</div>
-												<Badge variant="outline" className="text-xs">
+												<Badge variant="outline" className="text-xs border-white/20 text-white/80">
 													{issue.severity}
 												</Badge>
 											</div>
@@ -214,25 +227,25 @@ export function ComplianceReportDisplay({ reports }: ComplianceReportProps) {
 							</CardContent>
 						</Card>
 
-						<Card className="border-green-500 dark:border-green-700">
+						<Card className="border-green-500/50 bg-white/5 backdrop-blur-xl animate-in fade-in duration-500">
 							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<CheckCircle2 className="h-5 w-5 text-green-500" />
+								<CardTitle className="flex items-center gap-2 text-white">
+									<CheckCircle2 className="h-5 w-5 text-green-400 animate-pulse" />
 									Compliant Version
 								</CardTitle>
-								<CardDescription>
+								<CardDescription className="text-white/60">
 									Auto-fixed ad copy that addresses all compliance issues
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-4">
-								<div className="rounded-lg bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 p-4">
-									<p className="text-base">{report.aiAnalysis.autoFixedCopy}</p>
+								<div className="rounded-lg bg-green-500/10 border border-green-500/30 p-4 transition-all duration-200 hover:bg-green-500/[0.12]">
+									<p className="text-base text-white">{report.aiAnalysis.autoFixedCopy}</p>
 								</div>
-								<div className="rounded-lg bg-muted p-3">
-									<p className="text-sm font-medium mb-1">
+								<div className="rounded-lg bg-white/10 p-3 border border-white/10">
+									<p className="text-sm font-medium mb-1 text-white">
 										Explanation of Changes:
 									</p>
-									<p className="text-sm text-muted-foreground">
+									<p className="text-sm text-white/70">
 										{report.aiAnalysis.explanation}
 									</p>
 								</div>

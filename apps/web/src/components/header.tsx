@@ -6,10 +6,10 @@ export default function Header() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<header className="relative z-20 flex items-center justify-between p-6">
+		<header className="relative z-20 flex items-center justify-between p-6 animate-in fade-in slide-in-from-top-4 duration-700">
 			{/* Logo */}
-			<Link to="/" className="flex items-center">
-				<span className="text-2xl font-medium text-white">
+			<Link to="/" className="flex items-center group">
+				<span className="text-2xl font-medium text-white transition-all duration-200">
 					<span className="italic instrument">Rizz</span> Ads
 				</span>
 			</Link>
@@ -53,7 +53,7 @@ export default function Header() {
 						Sign In
 					</Link>
 				) : (
-					<div className="[&_button]:bg-white/10 [&_button]:backdrop-blur-sm [&_button]:text-white [&_button]:border-white/20 [&_button]:hover:bg-white/20">
+					<div className="[&_button]:bg-white/10 [&_button]:backdrop-blur-sm [&_button]:text-white [&_button]:border-white/20 [&_button]:hover:bg-white/20 [&_button]:transition-all [&_button]:duration-200">
 						<UserMenu />
 					</div>
 				)}

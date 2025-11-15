@@ -62,13 +62,13 @@ export default function SignInForm({
 	};
 
 	return (
-		<div className="mx-auto w-full mt-10 max-w-md p-6">
-			<h1 className="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+		<div className="mx-auto w-full mt-10 max-w-md p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+			<h1 className="mb-6 text-center text-3xl font-bold text-white">Welcome Back</h1>
 
 			<Button
 				type="button"
 				variant="outline"
-				className="w-full mb-4"
+				className="w-full mb-4 bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-200"
 				onClick={handleGoogleSignIn}
 			>
 				<svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -94,10 +94,10 @@ export default function SignInForm({
 
 			<div className="relative mb-4">
 				<div className="absolute inset-0 flex items-center">
-					<span className="w-full border-t" />
+					<span className="w-full border-t border-white/20" />
 				</div>
 				<div className="relative flex justify-center text-xs uppercase">
-					<span className="bg-background px-2 text-muted-foreground">
+					<span className="bg-transparent px-2 text-white/60">
 						Or continue with email
 					</span>
 				</div>
@@ -115,7 +115,7 @@ export default function SignInForm({
 					<form.Field name="email">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>Email</Label>
+								<Label htmlFor={field.name} className="text-white/90">Email</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -123,9 +123,10 @@ export default function SignInForm({
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
+									className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-purple-500 transition-all duration-200"
 								/>
 								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
+									<p key={error?.message} className="text-red-400 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
 										{error?.message}
 									</p>
 								))}
@@ -138,7 +139,7 @@ export default function SignInForm({
 					<form.Field name="password">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
+								<Label htmlFor={field.name} className="text-white/90">Password</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -146,9 +147,10 @@ export default function SignInForm({
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
+									className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-purple-500 transition-all duration-200"
 								/>
 								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
+									<p key={error?.message} className="text-red-400 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
 										{error?.message}
 									</p>
 								))}
@@ -161,10 +163,17 @@ export default function SignInForm({
 					{(state) => (
 						<Button
 							type="submit"
-							className="w-full"
+							className="w-full bg-primary hover:bg-primary/90 text-white disabled:opacity-50 transition-all duration-200"
 							disabled={!state.canSubmit || state.isSubmitting}
 						>
-							{state.isSubmitting ? "Submitting..." : "Sign In"}
+							{state.isSubmitting ? (
+								<>
+									<div className="w-4 h-4 mr-2 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+									Signing In...
+								</>
+							) : (
+								"Sign In"
+							)}
 						</Button>
 					)}
 				</form.Subscribe>
@@ -174,7 +183,7 @@ export default function SignInForm({
 				<Button
 					variant="link"
 					onClick={onSwitchToSignUp}
-					className="text-white/70 hover:text-white"
+					className="text-white/70 hover:text-white transition-all duration-200"
 				>
 					Need an account? Sign Up
 				</Button>

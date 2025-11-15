@@ -175,57 +175,57 @@ export function AdGeneratorStepper({
 						/>
 					</div>
 
-					{/* Step Indicators */}
-					{steps.map((step, index) => {
-						const isCompleted = currentStep > step.id;
-						const isCurrent = currentStep === step.id;
+				{/* Step Indicators */}
+				{steps.map((step, index) => {
+					const isCompleted = currentStep > step.id;
+					const isCurrent = currentStep === step.id;
 
-						return (
+					return (
+						<div
+							key={step.id}
+							className="flex flex-col items-center relative z-10"
+						>
 							<div
-								key={step.id}
-								className="flex flex-col items-center relative z-10"
+							className={cn(
+								"w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 mb-2",
+								isCompleted &&
+									"bg-primary",
+								isCurrent &&
+									"bg-white/20 backdrop-blur-sm ring-2 ring-white/40",
+								!isCompleted && !isCurrent && "bg-white/5 backdrop-blur-sm",
+							)}
 							>
-								<div
+								{isCompleted ? (
+									<Check className="w-5 h-5 text-white animate-in zoom-in duration-300" />
+								) : (
+									<span className="text-white font-medium">{step.id}</span>
+								)}
+							</div>
+							<div className="text-center">
+								<p
 									className={cn(
-										"w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 mb-2",
-										isCompleted &&
-											"bg-gradient-to-r from-purple-500 to-pink-500",
-										isCurrent &&
-											"bg-white/20 backdrop-blur-sm ring-2 ring-white/40",
-										!isCompleted && !isCurrent && "bg-white/5 backdrop-blur-sm",
+										"text-sm font-medium transition-all duration-300",
+										isCurrent ? "text-white" : "text-white/50",
 									)}
 								>
-									{isCompleted ? (
-										<Check className="w-5 h-5 text-white" />
-									) : (
-										<span className="text-white font-medium">{step.id}</span>
-									)}
-								</div>
-								<div className="text-center">
-									<p
-										className={cn(
-											"text-sm font-medium transition-colors",
-											isCurrent ? "text-white" : "text-white/50",
-										)}
-									>
-										{step.title}
-									</p>
-									<p className="text-xs text-white/30 mt-1 hidden sm:block">
-										{step.description}
-									</p>
-								</div>
+									{step.title}
+								</p>
+								<p className="text-xs text-white/30 mt-1 hidden sm:block transition-opacity duration-300">
+									{step.description}
+								</p>
 							</div>
-						);
-					})}
+						</div>
+					);
+				})}
 				</div>
 			</div>
 
 			{/* Form Content */}
 			<form onSubmit={handleSubmit} className="space-y-8">
-				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 min-h-[500px]">
+				<div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 min-h-[500px] transition-all duration-300 hover:border-white/20">
 					{/* Step 1: Product Details */}
 					{currentStep === 1 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
+						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-1">
 							<div>
 								<h2 className="text-2xl font-semibold text-white mb-2">
 									Product Information
@@ -377,7 +377,7 @@ export function AdGeneratorStepper({
 
 					{/* Step 2: Ad Copy */}
 					{currentStep === 2 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
+						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-2">
 							<div>
 								<h2 className="text-2xl font-semibold text-white mb-2">
 									Base Ad Copy
@@ -413,7 +413,7 @@ export function AdGeneratorStepper({
 
 					{/* Step 3: Target Markets & Platforms */}
 					{currentStep === 3 && (
-						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
+						<div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" key="step-3">
 							<div>
 								<h2 className="text-2xl font-semibold text-white mb-2">
 									Target Markets & Platforms
@@ -436,10 +436,10 @@ export function AdGeneratorStepper({
 														: "outline"
 												}
 												className={cn(
-													"cursor-pointer transition-all duration-200 hover:scale-105",
+													"cursor-pointer transition-all duration-300",
 													formData.selectedLocales.includes(locale.code)
-														? "bg-gradient-to-r from-purple-500 to-pink-500 border-0 text-white"
-														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20",
+														? "bg-primary border-0 text-white animate-in fade-in duration-200"
+														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20 hover:border-white/30",
 												)}
 												onClick={() => handleLocaleToggle(locale.code)}
 											>
@@ -474,10 +474,10 @@ export function AdGeneratorStepper({
 														: "outline"
 												}
 												className={cn(
-													"cursor-pointer transition-all duration-200 hover:scale-105",
+													"cursor-pointer transition-all duration-300",
 													formData.selectedPlatforms.includes(platform.id)
-														? "bg-gradient-to-r from-purple-500 to-pink-500 border-0 text-white"
-														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20",
+														? "bg-primary border-0 text-white animate-in fade-in duration-200"
+														: "bg-white/10 border-white/20 text-white/70 hover:bg-white/20 hover:border-white/30",
 												)}
 												onClick={() => handlePlatformToggle(platform.id)}
 											>
@@ -510,7 +510,7 @@ export function AdGeneratorStepper({
 						variant="ghost"
 						onClick={handleBack}
 						disabled={currentStep === 1}
-						className="text-white/70 hover:text-white hover:bg-white/10 disabled:opacity-30"
+						className="text-white/70 hover:text-white hover:bg-white/10 disabled:opacity-30 transition-all duration-200"
 					>
 						<ChevronLeft className="w-4 h-4 mr-2" />
 						Back
@@ -522,7 +522,7 @@ export function AdGeneratorStepper({
 								type="button"
 								onClick={handleNext}
 								disabled={!canProceedFromStep(currentStep)}
-								className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+								className="bg-primary hover:bg-primary/90 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
 							>
 								Continue
 								<ChevronRight className="w-4 h-4 ml-2" />
@@ -531,7 +531,7 @@ export function AdGeneratorStepper({
 							<Button
 								type="submit"
 								disabled={!canProceedFromStep(3) || isLoading}
-								className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px]"
+								className="bg-primary hover:bg-primary/90 text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px] transition-all duration-200"
 							>
 								{isLoading ? (
 									<>
