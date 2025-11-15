@@ -26,6 +26,7 @@ function RouteComponent() {
 
   return (
     <ShaderBackground>
+      <Header />
       <div className="relative z-10 container mx-auto px-6 py-12">
         <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
           <h1 className="text-4xl font-bold text-white mb-4">Dashboard</h1>

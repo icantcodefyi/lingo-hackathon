@@ -115,6 +115,8 @@ function RouteComponent() {
 
   return (
     <ShaderBackground>
+      <Header />
+
       <div className="relative z-10 container mx-auto px-6 py-12 max-w-7xl">
         {/* Hero Section */}
         {!adResults && (

@@ -24,6 +24,7 @@ function RouteComponent() {
 
   return (
     <ShaderBackground>
+      <Header />
       <div className="relative z-10 container mx-auto px-6 py-12 flex items-center justify-center min-h-[calc(100vh-200px)]">
         <div className="w-full max-w-md">
           {showSignIn ? (
