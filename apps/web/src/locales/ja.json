@@ -1,0 +1,18 @@
+{
+  "common": {
+    "app": "アプリ",
+    "signIn": "サインイン"
+  },
+  "hero": {
+    "poweredBy": "✨ Lingo.dev + AIを搭載",
+    "titleSuffix": "広告",
+    "subtitle": "グローバル広告",
+    "description": "数分で任意の市場向けの広告を作成、ローカライズ、法的に検証できます。1つの広告を、文化的に適応し、法的に準拠し、プラットフォーム対応のあらゆる市場向けパッケージに変換します。",
+    "aboutLingo": "Lingo.devについて",
+    "launchApp": "アプリを起動"
+  },
+  "header": {
+    "lingoDev": "Lingo.dev",
+    "github": "GitHub"
+  }
+}

@@ -1,0 +1,19 @@
+{
+	"common": {
+		"app": "App",
+		"signIn": "Sign In"
+	},
+	"hero": {
+		"poweredBy": "✨ Powered by Lingo.dev + AI",
+		"titleSuffix": "Ads",
+		"subtitle": "Global Advertising",
+		"description": "Create, localize, and legally validate ads for any market in minutes. Transform one ad into a culturally adapted, legally compliant, platform-ready bundle for every market.",
+		"aboutLingo": "About Lingo.dev",
+		"launchApp": "Launch App"
+	},
+	"header": {
+		"lingoDev": "Lingo.dev",
+		"github": "GitHub"
+	}
+}
+

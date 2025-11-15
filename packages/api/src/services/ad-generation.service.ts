@@ -34,7 +34,7 @@ export async function generateAds(request: AdGenerationRequest) {
 	const errors: Array<{ locale: string; error: string }> = [];
 
 	// Process each locale
-	for (const locale of request.targetLocales as LocaleCode[]) {
+	for (const locale of request.targetLocales) {
 		try {
 			const variant = await generateLocaleVariant(request, locale);
 			results.push(variant);
@@ -94,7 +94,7 @@ async function generateLocaleVariant(
 	// Step 2: Format for each target platform
 	const platformAds: Record<string, any> = {};
 
-	for (const platformId of request.targetPlatforms as PlatformId[]) {
+	for (const platformId of request.targetPlatforms) {
 		const platformConfig = getPlatformConfig(platformId);
 		if (!platformConfig) {
 			console.warn(`Skipping unsupported platform: ${platformId}`);
@@ -184,14 +184,17 @@ export function getSupportedLocales() {
 	const { REGION_CONFIGS } = require("../config/region.config");
 
 	return Object.keys(REGION_CONFIGS).map((code) => {
-		const [languageCode, regionCode] = code.split("-");
+		const parts = code.split("-");
+		const languageCode = parts[0] || code;
+		const regionCode = parts[1] || code;
+
+		const languageDisplay = new Intl.DisplayNames(["en"], { type: "language" });
+		const regionDisplay = new Intl.DisplayNames(["en"], { type: "region" });
 
 		return {
 			code,
-			name: new Intl.DisplayNames(["en"], { type: "language" }).of(
-				languageCode,
-			),
-			region: new Intl.DisplayNames(["en"], { type: "region" }).of(regionCode),
+			name: languageDisplay.of(languageCode) || languageCode,
+			region: regionDisplay.of(regionCode) || regionCode,
 			config: REGION_CONFIGS[code],
 		};
 	});

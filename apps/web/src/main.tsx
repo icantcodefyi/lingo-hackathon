@@ -6,6 +6,9 @@ import { routeTree } from "./routeTree.gen";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { orpc, queryClient } from "./utils/orpc";
 
+// Initialize i18n before app renders
+import "./lib/i18n";
+
 const router = createRouter({
 	routeTree,
 	defaultPreload: "intent",

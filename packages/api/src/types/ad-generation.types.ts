@@ -151,6 +151,21 @@ export interface PlatformInfo {
 // Zod Schemas for Runtime Validation
 // ============================================================================
 
+const localeCodeEnum = z.enum([
+	"en-US",
+	"en-GB",
+	"es-MX",
+	"ja-JP",
+	"de-DE",
+	"fr-FR",
+	"ar-SA",
+	"hi-IN",
+	"pt-BR",
+	"zh-CN",
+]);
+
+const platformIdEnum = z.enum(["google", "meta", "linkedin", "tiktok"]);
+
 export const productDetailsSchema = z.object({
 	name: z.string().min(1, "Product name is required"),
 	category: z.string().min(1, "Category is required"),
@@ -168,10 +183,10 @@ export const adGenerationInputSchema = z.object({
 		.max(1000, "Base copy must not exceed 1000 characters"),
 	productDetails: productDetailsSchema,
 	targetLocales: z
-		.array(z.string())
+		.array(localeCodeEnum)
 		.min(1, "At least one target locale is required"),
 	targetPlatforms: z
-		.array(z.string())
+		.array(platformIdEnum)
 		.min(1, "At least one target platform is required"),
 	industry: z.string().min(1, "Industry is required"),
 	brandVoice: z.string().optional(),

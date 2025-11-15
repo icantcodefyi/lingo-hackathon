@@ -1,0 +1,13 @@
+version: 1
+checksums:
+  ea7107c3b2114dd670e1098a4b5806db:
+    common/app: 77e32ac4e5a1e01bc9a6a15fdfef9bf8
+    common/signIn: ec7b8f314fe9bc6591006707484ede61
+    hero/poweredBy: ac208c14065f8771a57e13a1ef9e1802
+    hero/titleSuffix: 039d995151ced12e1296c0d0d14921bd
+    hero/subtitle: bedb3b9fd3893685e224cbdd85f65f96
+    hero/description: 508b0ae92696228f2100044ba026864a
+    hero/aboutLingo: 39274caad08b8b46b2842e53cdcc9d39
+    hero/launchApp: ff9b25ed4609fdccfbbf09b66b573fbe
+    header/lingoDev: 307099c62b17ca01597fc01c2fa7b9f6
+    header/github: 6e1cf3c00fa6fbe24afcc78ea3b5f3e4

@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { ORPCError, os } from "@orpc/server";
 import type { Context } from "./context";
 

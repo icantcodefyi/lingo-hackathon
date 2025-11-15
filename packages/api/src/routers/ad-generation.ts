@@ -4,7 +4,7 @@
  */
 
 import { publicProcedure } from "../index";
-import { adGenerationInputSchema } from "../types/ad-generation.types";
+import { adGenerationInputSchema, type AdGenerationRequest } from "../types/ad-generation.types";
 import {
 	generateAds,
 	getSupportedLocales,
@@ -24,7 +24,7 @@ export const adGenerationRouter = {
 		.input(adGenerationInputSchema)
 		.handler(async ({ input }) => {
 			try {
-				return await generateAds(input);
+				return await generateAds(input as AdGenerationRequest);
 			} catch (error) {
 				logError(error, "adGenerationRouter.generateAds");
 				throw error;
@@ -62,7 +62,7 @@ export const adGenerationRouter = {
 		.input(adGenerationInputSchema)
 		.handler(({ input }) => {
 			try {
-				return estimateGeneration(input);
+				return estimateGeneration(input as AdGenerationRequest);
 			} catch (error) {
 				logError(error, "adGenerationRouter.estimateGeneration");
 				throw error;

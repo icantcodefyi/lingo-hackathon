@@ -1,0 +1,85 @@
+name: Lingo.dev i18n
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'apps/web/src/**/*.tsx'
+      - 'apps/web/src/**/*.ts'
+      - 'lingo.config.json'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'apps/web/src/**/*.tsx'
+      - 'apps/web/src/**/*.ts'
+      - 'lingo.config.json'
+  workflow_dispatch:
+
+jobs:
+  i18n:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run Lingo.dev translations
+        uses: lingodotdev/lingo.dev@main
+        with:
+          api-key: ${{ secrets.LINGODOTDEV_API_KEY }}
+          frozen: false
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit translation changes
+        if: steps.check-changes.outputs.changes == 'true' && github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add apps/web/src/locales/
+          git commit -m "🌍 Auto-translate: Update translations [skip ci]" || exit 0
+          git push
+
+      - name: Create Pull Request
+        if: steps.check-changes.outputs.changes == 'true' && github.event_name == 'pull_request'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "🌍 Auto-translate: Update translations"
+          title: "🌍 Auto-translate: Update translations"
+          body: |
+            This PR was automatically created by Lingo.dev CI/CD to update translations.
+            
+            ## Changes
+            - Updated translation files in `apps/web/src/locales/`
+            - Translations generated for: es, fr, de, ja, pt, zh-CN, ar
+            
+            Please review the changes and merge if everything looks good.
+          branch: lingo-dev-auto-translate
+          delete-branch: true
+

@@ -1,0 +1,18 @@
+{
+  "common": {
+    "app": "App",
+    "signIn": "Entrar"
+  },
+  "hero": {
+    "poweredBy": "✨ Desenvolvido por Lingo.dev + IA",
+    "titleSuffix": "Anúncios",
+    "subtitle": "Publicidade global",
+    "description": "Crie, localize e valide legalmente anúncios para qualquer mercado em minutos. Transforme um anúncio em um pacote culturalmente adaptado, legalmente compatível e pronto para plataformas em todos os mercados.",
+    "aboutLingo": "Sobre a Lingo.dev",
+    "launchApp": "Iniciar app"
+  },
+  "header": {
+    "lingoDev": "Lingo.dev",
+    "github": "GitHub"
+  }
+}

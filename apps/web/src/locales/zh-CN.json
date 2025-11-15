@@ -1,0 +1,18 @@
+{
+  "common": {
+    "app": "App",
+    "signIn": "登录"
+  },
+  "hero": {
+    "poweredBy": "✨ 技术支持：Lingo.dev + AI",
+    "titleSuffix": "广告",
+    "subtitle": "全球广告",
+    "description": "在几分钟内创建、翻译并合法验证适用于任何市场的广告。将一则广告转化为适应文化、符合法律要求、并适合平台的多市场广告包。",
+    "aboutLingo": "关于 Lingo.dev",
+    "launchApp": "启动 App"
+  },
+  "header": {
+    "lingoDev": "Lingo.dev",
+    "github": "GitHub"
+  }
+}
