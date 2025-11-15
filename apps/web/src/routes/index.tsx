@@ -5,15 +5,15 @@ import HeroContent from "@/components/hero-content";
 import PulsingCircle from "@/components/pulsing-circle";
 
 export const Route = createFileRoute("/")({
-  component: HomeComponent,
+	component: HomeComponent,
 });
 
 function HomeComponent() {
-  return (
-    <ShaderBackground>
-      <Header />
-      <HeroContent />
-      <PulsingCircle />
-    </ShaderBackground>
-  );
+	return (
+		<ShaderBackground>
+			<Header />
+			<HeroContent />
+			<PulsingCircle />
+		</ShaderBackground>
+	);
 }
