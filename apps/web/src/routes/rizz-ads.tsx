@@ -1,22 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { orpc } from "@/utils/orpc";
-import { AdGeneratorForm } from "@/components/ad-generator-form";
+import { orpc, client } from "@/utils/orpc";
+import { authClient } from "@/lib/auth-client";
+import { AdGeneratorStepper } from "@/components/ad-generator-stepper";
 import { AdResultsDisplay } from "@/components/ad-results-display";
 import { ComplianceReportDisplay } from "@/components/compliance-report";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { toast } from "sonner";
-import { Sparkles, Shield, Globe2, Zap } from "lucide-react";
+import ShaderBackground from "@/components/shader-background";
+import Header from "@/components/header";
+import { Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/rizz-ads")({
   component: RouteComponent,
+  beforeLoad: async () => {
+    const session = await authClient.getSession();
+    if (!session.data) {
+      throw redirect({
+        to: "/login",
+      });
+    }
+    return { session };
+  },
 });
 
 function RouteComponent() {
@@ -33,7 +38,7 @@ function RouteComponent() {
 
   const generateAdsMutation = useMutation({
     mutationFn: async (data: any) => {
-      return orpc.generateAds.mutate(data);
+      return client.generateAds(data);
     },
     onSuccess: (data) => {
       setAdResults(data);
@@ -54,7 +59,7 @@ function RouteComponent() {
       platform: string;
       industry: string;
     }) => {
-      return orpc.checkCompliance.mutate(data);
+      return client.checkCompliance(data);
     },
     onSuccess: (data) => {
       setComplianceReports((prev) => [...prev, data]);
@@ -109,101 +114,76 @@ function RouteComponent() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Hero Section */}
-      <div className="mb-12 text-center space-y-4">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Sparkles className="h-8 w-8 text-primary" />
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Rizz Ads
-          </h1>
+    <ShaderBackground>
+      <div className="relative z-10 container mx-auto px-6 py-12 max-w-7xl">
+        {/* Hero Section */}
+        {!adResults && (
+          <div className="mb-16 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sparkles className="h-10 w-10 text-white" />
+              <h1 className="text-6xl font-bold text-white">
+                <span className="italic instrument">Rizz</span> Ads
+              </h1>
+            </div>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              Global Ad Generation + Compliance Engine
+            </p>
+            <p className="text-base text-white/60 max-w-2xl mx-auto">
+              Create, localize, and legally validate ads for any market in
+              minutes
+            </p>
+          </div>
+        )}
+
+        {/* Main Content */}
+        <div className="space-y-16">
+          {!adResults && (
+            <section>
+              <AdGeneratorStepper
+                onGenerate={handleGenerate}
+                isLoading={generateAdsMutation.isPending}
+                supportedLocales={supportedLocales || []}
+                supportedPlatforms={supportedPlatforms || []}
+              />
+            </section>
+          )}
+
+          {adResults && (
+            <>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-white mb-2">
+                  Your Generated Ads
+                </h2>
+                <p className="text-white/60">
+                  Review your localized ads and check compliance
+                </p>
+              </div>
+              <section>
+                <AdResultsDisplay
+                  results={adResults.results}
+                  onRunCompliance={handleRunCompliance}
+                  onExport={handleExport}
+                />
+              </section>
+            </>
+          )}
+
+          {complianceReports.length > 0 && (
+            <section>
+              <ComplianceReportDisplay reports={complianceReports} />
+            </section>
+          )}
         </div>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Global Ad Generation + Compliance Engine
-        </p>
-        <p className="text-lg max-w-4xl mx-auto">
-          Create, localize, and legally validate ads for any market in minutes.
-          Powered by AI + Cultural Intelligence + Compliance Checking.
-        </p>
+
+        {/* Powered by Section */}
+        <div className="mt-20 pt-8 border-t border-white/10 text-center">
+          <p className="text-sm text-white/40">
+            Powered by{" "}
+            <span className="font-semibold text-white/60">Lingo.dev</span> +
+            OpenAI GPT-4 + Cultural AI
+          </p>
+        </div>
       </div>
-
-      {/* Features Grid */}
-      <div className="grid md:grid-cols-3 gap-6 mb-12">
-        <Card>
-          <CardHeader>
-            <Globe2 className="h-8 w-8 mb-2 text-blue-500" />
-            <CardTitle>Cultural Adaptation</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Automatically adapt your ads for 10+ regions with culturally
-              appropriate tone, emoji usage, and CTAs
-            </CardDescription>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <Zap className="h-8 w-8 mb-2 text-yellow-500" />
-            <CardTitle>Platform Optimization</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Generate platform-specific formats for Google Ads, Meta, LinkedIn,
-              and TikTok with perfect character limits
-            </CardDescription>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <Shield className="h-8 w-8 mb-2 text-green-500" />
-            <CardTitle>Legal Compliance</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Validate against country laws, platform rules, and industry
-              regulations with AI-powered auto-fixes
-            </CardDescription>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Main Content */}
-      <div className="space-y-12">
-        <section>
-          <AdGeneratorForm
-            onGenerate={handleGenerate}
-            isLoading={generateAdsMutation.isPending}
-            supportedLocales={supportedLocales || []}
-            supportedPlatforms={supportedPlatforms || []}
-          />
-        </section>
-
-        {adResults && (
-          <section>
-            <AdResultsDisplay
-              results={adResults.results}
-              onRunCompliance={handleRunCompliance}
-              onExport={handleExport}
-            />
-          </section>
-        )}
-
-        {complianceReports.length > 0 && (
-          <section>
-            <ComplianceReportDisplay reports={complianceReports} />
-          </section>
-        )}
-      </div>
-
-      {/* Powered by Section */}
-      <div className="mt-16 pt-8 border-t text-center">
-        <p className="text-sm text-muted-foreground">
-          Powered by <span className="font-semibold">Lingo.dev</span> + OpenAI
-          GPT-4 + Cultural AI
-        </p>
-      </div>
-    </div>
+    </ShaderBackground>
   );
 }

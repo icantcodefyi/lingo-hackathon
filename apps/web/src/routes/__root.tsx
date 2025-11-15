@@ -12,7 +12,6 @@ import {
   HeadContent,
   Outlet,
   createRootRouteWithContext,
-  useRouterState,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import "../index.css";
@@ -46,8 +45,6 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 function RootComponent() {
   const [client] = useState<AppRouterClient>(() => createORPCClient(link));
   const [orpcUtils] = useState(() => createTanstackQueryUtils(client));
-  const router = useRouterState();
-  const isLandingPage = router.location.pathname === "/";
 
   return (
     <>
@@ -58,14 +55,10 @@ function RootComponent() {
         disableTransitionOnChange
         storageKey="vite-ui-theme"
       >
-        {isLandingPage ? (
+        <div className="grid grid-rows-[auto_1fr] h-svh">
+          <Header />
           <Outlet />
-        ) : (
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            <Outlet />
-          </div>
-        )}
+        </div>
         <Toaster richColors />
       </ThemeProvider>
       <TanStackRouterDevtools position="bottom-left" />

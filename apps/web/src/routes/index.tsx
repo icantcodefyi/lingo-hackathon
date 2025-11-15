@@ -11,7 +11,6 @@ export const Route = createFileRoute("/")({
 function HomeComponent() {
   return (
     <ShaderBackground>
-      <Header />
       <HeroContent />
       <PulsingCircle />
     </ShaderBackground>
