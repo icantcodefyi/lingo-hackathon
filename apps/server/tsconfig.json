@@ -8,5 +8,10 @@
 			"@/*": ["./src/*"]
 		},
 		"jsx": "react-jsx"
-	}
+	},
+	"references": [
+		{ "path": "../../packages/api" },
+		{ "path": "../../packages/auth" },
+		{ "path": "../../packages/db" }
+	]
 }
