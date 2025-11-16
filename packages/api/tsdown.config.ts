@@ -6,4 +6,5 @@ export default defineConfig({
 	outDir: "./dist",
 	sourcemap: true,
 	dts: true,
+	external: ["bun"],
 });
