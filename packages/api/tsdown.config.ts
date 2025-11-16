@@ -7,5 +7,4 @@ export default defineConfig({
 	sourcemap: true,
 	dts: true,
 	external: ["bun"],
-	splitting: false,
 });
