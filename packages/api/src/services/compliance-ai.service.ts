@@ -265,7 +265,7 @@ export async function quickComplianceCheck(params: {
 	locale: string;
 	platform: string;
 }) {
-	const { adCopy, _locale, _platform } = params;
+	const { adCopy } = params;
 
 	// Simple heuristic checks
 	const concerns: string[] = [];

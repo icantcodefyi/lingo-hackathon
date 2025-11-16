@@ -284,8 +284,8 @@ export function calculateAdQualityScore(
 
 	// Check character limits
 	for (const [field, value] of Object.entries(adObject)) {
-		if (value && constraints[field]) {
-			const maxLength = constraints[field];
+		const maxLength = constraints[field];
+		if (value && maxLength !== undefined) {
 			const utilization = (value.length / maxLength) * 100;
 
 			if (value.length > maxLength) {

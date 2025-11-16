@@ -70,8 +70,8 @@ export function validateAdCopy(
 	const errors: string[] = [];
 
 	for (const [field, value] of Object.entries(adCopy)) {
-		if (value && constraints[field]) {
-			const maxLength = constraints[field];
+		const maxLength = constraints[field];
+		if (value && maxLength !== undefined) {
 			if (value.length > maxLength) {
 				errors.push(
 					`${field} exceeds maximum length of ${maxLength} (current: ${value.length})`,

@@ -11,7 +11,6 @@ import { handleValidationError, logError } from "../utils/error-handler";
 import { analyzeComplianceWithAI } from "./compliance-ai.service";
 import {
 	calculateComplianceScore,
-	isSafeToPublish,
 	validateCompliance,
 } from "./compliance-validator.service";
 
@@ -45,11 +44,6 @@ export async function checkCompliance(request: ComplianceCheckRequest) {
 		});
 
 		// Step 3: Calculate metadata
-		const _complianceScore = calculateComplianceScore(patternMatchedIssues);
-		const _publishStatus = isSafeToPublish(
-			patternMatchedIssues,
-			!request.strictMode,
-		);
 
 		const processingTimeMs = Date.now() - startTime;
 
