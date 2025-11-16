@@ -44,11 +44,16 @@ export interface TikTokAdFormat {
 	displayName?: string;
 }
 
+export interface ErrorAdFormat {
+	error: string;
+}
+
 export type PlatformAdFormat =
 	| GoogleAdFormat
 	| MetaAdFormat
 	| LinkedInAdFormat
-	| TikTokAdFormat;
+	| TikTokAdFormat
+	| ErrorAdFormat;
 
 // ============================================================================
 // Regional Types
