@@ -160,14 +160,6 @@ export function validateProductDetails(product: {
 		errors.push("Product category is required");
 	}
 
-	if (!product.features || product.features.length === 0) {
-		errors.push("At least one product feature is required");
-	}
-
-	if (!product.benefits || product.benefits.length === 0) {
-		errors.push("At least one product benefit is required");
-	}
-
 	return {
 		valid: errors.length === 0,
 		errors,

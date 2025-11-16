@@ -48,10 +48,10 @@
 			"categoryPlaceholder": "e.g., Productivity Software",
 			"industry": "Industry *",
 			"industryPlaceholder": "e.g., SaaS, Finance, Healthcare",
-			"features": "Key Features (optional)",
+			"features": "Key Features",
 			"featurePlaceholder": "e.g., AI-powered content generation",
 			"addFeature": "Add Feature",
-			"benefits": "Key Benefits (optional)",
+			"benefits": "Key Benefits",
 			"benefitPlaceholder": "e.g., Save 10 hours per week",
 			"addBenefit": "Add Benefit"
 		},

@@ -7,6 +7,7 @@ import {
 	X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import i18n from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Badge } from "./ui/badge";
@@ -142,10 +143,14 @@ export function AdGeneratorStepper({
 	const canProceedFromStep = (step: number) => {
 		switch (step) {
 			case 1:
+				const hasFeatures = formData.features.some((f) => f.trim().length > 0);
+				const hasBenefits = formData.benefits.some((b) => b.trim().length > 0);
 				return (
 					formData.productName.trim() &&
 					formData.productCategory.trim() &&
-					formData.industry.trim()
+					formData.industry.trim() &&
+					hasFeatures &&
+					hasBenefits
 				);
 			case 2:
 				return formData.baseCopy.trim();
@@ -173,14 +178,27 @@ export function AdGeneratorStepper({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		const filteredFeatures = formData.features.filter((f) => f.trim());
+		const filteredBenefits = formData.benefits.filter((b) => b.trim());
+		
+		if (filteredFeatures.length === 0) {
+			toast.error("At least one feature is required");
+			return;
+		}
+		
+		if (filteredBenefits.length === 0) {
+			toast.error("At least one benefit is required");
+			return;
+		}
+		
 		if (canProceedFromStep(3)) {
 			onGenerate({
 				baseCopy: formData.baseCopy,
 				productDetails: {
 					name: formData.productName,
 					category: formData.productCategory,
-					features: formData.features.filter((f) => f.trim()),
-					benefits: formData.benefits.filter((b) => b.trim()),
+					features: filteredFeatures,
+					benefits: filteredBenefits,
 				},
 				targetLocales: formData.selectedLocales,
 				targetPlatforms: formData.selectedPlatforms,
@@ -334,7 +352,7 @@ export function AdGeneratorStepper({
 									<div className="space-y-2">
 										{formData.features.map((feature, index) => (
 											<div
-												key={`feature-${index}-${feature}`}
+												key={`feature-${index}`}
 												className="flex gap-2"
 											>
 												<Input
@@ -370,6 +388,11 @@ export function AdGeneratorStepper({
 											<Plus className="mr-2 h-4 w-4" />
 											{t("adGenerator.productInfo.addFeature")}
 										</Button>
+										{formData.features.filter((f) => f.trim()).length === 0 && (
+											<p className="text-sm text-red-400">
+												At least one feature is required
+											</p>
+										)}
 									</div>
 								</div>
 
@@ -380,7 +403,7 @@ export function AdGeneratorStepper({
 									<div className="space-y-2">
 										{formData.benefits.map((benefit, index) => (
 											<div
-												key={`benefit-${index}-${benefit}`}
+												key={`benefit-${index}`}
 												className="flex gap-2"
 											>
 												<Input
@@ -416,6 +439,11 @@ export function AdGeneratorStepper({
 											<Plus className="mr-2 h-4 w-4" />
 											{t("adGenerator.productInfo.addBenefit")}
 										</Button>
+										{formData.benefits.filter((b) => b.trim()).length === 0 && (
+											<p className="text-sm text-red-400">
+												At least one benefit is required
+											</p>
+										)}
 									</div>
 								</div>
 							</div>

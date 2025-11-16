@@ -1,5 +1,6 @@
 import { Loader2, Plus, X } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
@@ -84,13 +85,26 @@ export function AdGeneratorForm({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		const filteredFeatures = features.filter((f) => f.trim());
+		const filteredBenefits = benefits.filter((b) => b.trim());
+		
+		if (filteredFeatures.length === 0) {
+			toast.error("At least one feature is required");
+			return;
+		}
+		
+		if (filteredBenefits.length === 0) {
+			toast.error("At least one benefit is required");
+			return;
+		}
+		
 		onGenerate({
 			baseCopy,
 			productDetails: {
 				name: productName,
 				category: productCategory,
-				features: features.filter((f) => f.trim()),
-				benefits: benefits.filter((b) => b.trim()),
+				features: filteredFeatures,
+				benefits: filteredBenefits,
 			},
 			targetLocales: selectedLocales,
 			targetPlatforms: selectedPlatforms,
@@ -162,7 +176,7 @@ export function AdGeneratorForm({
 					<div className="space-y-2">
 						<Label>Features</Label>
 						{features.map((feature, index) => (
-							<div key={`feature-${index}-${feature}`} className="flex gap-2">
+							<div key={`feature-${index}`} className="flex gap-2">
 								<Input
 									value={feature}
 									onChange={(e) => handleFeatureChange(index, e.target.value)}
@@ -189,12 +203,17 @@ export function AdGeneratorForm({
 							<Plus className="mr-2 h-4 w-4" />
 							Add Feature
 						</Button>
+						{features.filter((f) => f.trim()).length === 0 && (
+							<p className="text-sm text-destructive">
+								At least one feature is required
+							</p>
+						)}
 					</div>
 
 					<div className="space-y-2">
 						<Label>Benefits</Label>
 						{benefits.map((benefit, index) => (
-							<div key={`benefit-${index}-${benefit}`} className="flex gap-2">
+							<div key={`benefit-${index}`} className="flex gap-2">
 								<Input
 									value={benefit}
 									onChange={(e) => handleBenefitChange(index, e.target.value)}
@@ -221,6 +240,11 @@ export function AdGeneratorForm({
 							<Plus className="mr-2 h-4 w-4" />
 							Add Benefit
 						</Button>
+						{benefits.filter((b) => b.trim()).length === 0 && (
+							<p className="text-sm text-destructive">
+								At least one benefit is required
+							</p>
+						)}
 					</div>
 				</CardContent>
 			</Card>

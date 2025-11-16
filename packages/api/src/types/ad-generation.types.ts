@@ -175,8 +175,8 @@ const platformIdEnum = z.enum(["google", "meta", "linkedin", "tiktok"]);
 export const productDetailsSchema = z.object({
 	name: z.string().min(1, "Product name is required"),
 	category: z.string().min(1, "Category is required"),
-	features: z.array(z.string()).min(1, "At least one feature is required"),
-	benefits: z.array(z.string()).min(1, "At least one benefit is required"),
+	features: z.array(z.string()).default([]),
+	benefits: z.array(z.string()).default([]),
 	targetAudience: z.string().optional(),
 	pricePoint: z.string().optional(),
 	uniqueSellingPoints: z.array(z.string()).optional(),
