@@ -1,6 +1,6 @@
 /**
  * Translation service for culturally-adapted ad copy
- * Handles translation and cultural localization using Lingo.dev SDK
+ * Handles translation and cultural localization using Lingo.dev SDK and CLI
  */
 
 import { LingoDotDevEngine } from "lingo.dev/sdk";
@@ -14,6 +14,7 @@ import {
 	handleGenerationError,
 	retryWithBackoff,
 } from "../utils/error-handler";
+import { batchTranslateWithCLI } from "./lingo-cli.service";
 
 /**
  * Initialize Lingo.dev SDK instance
@@ -55,6 +56,56 @@ function convertLocaleForLingo(locale: LocaleCode): string {
 function getSourceLocale(): string {
 	// Base copy is always in English, so source is always "en"
 	return "en";
+}
+
+/**
+ * Translate and culturally adapt ad copy using Lingo.dev CLI
+ * Falls back to SDK if CLI fails
+ */
+export async function translateWithCLI(params: {
+	baseCopy: string;
+	locale: LocaleCode;
+	productDetails: ProductDetails;
+	regionConfig: RegionConfig;
+	brandVoice?: string;
+	additionalContext?: string;
+}): Promise<TranslationResult> {
+	const {
+		baseCopy,
+		locale,
+		productDetails: _productDetails,
+		regionConfig,
+		brandVoice,
+		additionalContext,
+	} = params;
+
+	try {
+		// Use CLI for batch translation
+		const translations = await batchTranslateWithCLI(baseCopy, [locale]);
+		const translatedText = translations[locale] || baseCopy;
+
+		// Generate cultural notes
+		const culturalNotes = buildCulturalNotes({
+			regionConfig,
+			originalCopy: baseCopy,
+			translatedCopy: translatedText,
+			brandVoice,
+			additionalContext,
+		});
+
+		return {
+			translation: translatedText,
+			culturalNotes,
+			confidence: 0.9,
+		};
+	} catch (error) {
+		// Fallback to SDK if CLI fails
+		console.warn(
+			`CLI translation failed for ${locale}, falling back to SDK:`,
+			error,
+		);
+		return translateAdCopy(params);
+	}
 }
 
 /**

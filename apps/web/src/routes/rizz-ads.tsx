@@ -28,6 +28,7 @@ export const Route = createFileRoute("/rizz-ads")({
 
 function RouteComponent() {
 	const [adResults, setAdResults] = useState<AdGenerationResponse | null>(null);
+	const [industry, setIndustry] = useState<string>("general");
 	const [complianceReports, setComplianceReports] = useState<
 		ComplianceCheckResult[]
 	>([]);
@@ -58,8 +59,9 @@ function RouteComponent() {
 		mutationFn: async (data: Parameters<typeof client.generateAds>[0]) => {
 			return client.generateAds(data);
 		},
-		onSuccess: (data) => {
+		onSuccess: (data, variables) => {
 			setAdResults(data);
+			setIndustry(variables.industry || "general");
 			toast.success(
 				`Successfully generated ads for ${data.results.length} locales!`,
 			);
@@ -98,7 +100,6 @@ function RouteComponent() {
 		platform: string,
 		adCopy: string,
 	) => {
-		const industry = adResults?.results?.[0]?.industry || "general";
 		checkComplianceMutation.mutate({
 			adCopy,
 			locale,
@@ -110,10 +111,24 @@ function RouteComponent() {
 	const handleExport = () => {
 		if (!adResults) return;
 
+		// Restructure ads by locale code (matching folder structure: ads/{locale}.json)
+		const adsByLocale: Record<string, unknown> = {};
+		for (const result of adResults.results) {
+			const localeKey = `${result.locale}.json`;
+			adsByLocale[localeKey] = result;
+		}
+
+		// Restructure compliance reports by locale code (matching folder structure: compliance/{locale}.report.json)
+		const complianceByLocale: Record<string, unknown> = {};
+		for (const report of complianceReports) {
+			const localeKey = `${report.locale}.report.json`;
+			complianceByLocale[localeKey] = report;
+		}
+
 		const exportData = {
 			timestamp: new Date().toISOString(),
-			ads: adResults.results,
-			compliance: complianceReports,
+			ads: adsByLocale,
+			compliance: complianceByLocale,
 		};
 
 		const blob = new Blob([JSON.stringify(exportData, null, 2)], {

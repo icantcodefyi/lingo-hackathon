@@ -127,6 +127,7 @@ export interface AdGenerationRequest {
 	industry: string;
 	brandVoice?: string;
 	additionalContext?: string;
+	useCLI?: boolean; // Optional flag to use CLI instead of SDK for translation
 }
 
 export interface AdGenerationResponse {
@@ -196,6 +197,7 @@ export const adGenerationInputSchema = z.object({
 	industry: z.string().min(1, "Industry is required"),
 	brandVoice: z.string().optional(),
 	additionalContext: z.string().optional(),
+	useCLI: z.boolean().optional(), // Optional flag to use CLI instead of SDK
 });
 
 export const translationOutputSchema = z.object({

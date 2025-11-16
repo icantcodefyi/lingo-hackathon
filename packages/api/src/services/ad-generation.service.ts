@@ -18,7 +18,7 @@ import {
 	validateProductDetails,
 } from "../utils/validation-utils";
 import { formatAdForPlatform } from "./platform-formatter.service";
-import { translateAdCopy } from "./translation.service";
+import { translateAdCopy, translateWithCLI } from "./translation.service";
 
 /**
  * Generate localized ads for multiple platforms and locales
@@ -81,14 +81,24 @@ async function generateLocaleVariant(
 	}
 
 	// Step 1: Translate and culturally adapt the base copy
-	const translationResult = await translateAdCopy({
-		baseCopy: request.baseCopy,
-		locale,
-		productDetails: request.productDetails,
-		regionConfig,
-		brandVoice: request.brandVoice,
-		additionalContext: request.additionalContext,
-	});
+	// Use CLI if flag is set, otherwise use SDK
+	const translationResult = request.useCLI
+		? await translateWithCLI({
+				baseCopy: request.baseCopy,
+				locale,
+				productDetails: request.productDetails,
+				regionConfig,
+				brandVoice: request.brandVoice,
+				additionalContext: request.additionalContext,
+			})
+		: await translateAdCopy({
+				baseCopy: request.baseCopy,
+				locale,
+				productDetails: request.productDetails,
+				regionConfig,
+				brandVoice: request.brandVoice,
+				additionalContext: request.additionalContext,
+			});
 
 	// Step 2: Format for each target platform
 	const platformAds: Record<string, PlatformAdFormat> = {};
